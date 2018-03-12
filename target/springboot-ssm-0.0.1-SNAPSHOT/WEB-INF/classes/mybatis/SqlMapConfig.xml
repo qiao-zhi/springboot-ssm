@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 
+	<settings>
+		开启二级缓存
+		<setting name="cacheEnabled" value="true" />
+	</settings> -->
+	<!-- 只需要定义个别名,这个应该有 -->
+	<typeAliases>
+		<package name="cn.xm.exam.bean.common" />
+		<package name="cn.xm.exam.bean.employee" />
+		<package name="cn.xm.exam.bean.employee.in" />
+		<package name="cn.xm.exam.bean.employee.out" />
+		<package name="cn.xm.exam.bean.exam" />
+		<package name="cn.xm.exam.bean.grade" />
+		<package name="cn.xm.exam.bean.question" />
+		<package name="cn.xm.exam.bean.system" />
+		<package name="cn.xm.exam.bean.trainContent" />
+	</typeAliases>
+</configuration>
