@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <title></title>
+
+	<script th:src="@{/static/js/test.js}"></script>
+</head>
+<body>
+
+<div>
+	用户姓名：<input id="id" name="name"  value="value" th:id="${user.username}" th:name="${user.username}" th:value="${user.username}"/>
+	<br/>
+	用户生日：<input th:value="${user.birthday}"/>
+	<br/>
+	用户生日：<input th:value="${#dates.format(user.birthday, 'yyyy-MM-dd')}"/>
+	<br/>
+</div>
+
+<br/>
+<div th:object="${user}">
+	用户姓名：<input th:id="*{username}" th:name="*{username}" th:value="*{username}"/>
+	<br/>
+	用户生日：<input th:value="*{#dates.format(birthday, 'yyyy-MM-dd hh:mm:ss')}"/>
+	<br/>
+</div>
+
+<br/>
+
+text 与 utext ：<br/>
+<span th:text="${user.address}">abc</span>
+<br/>
+<span th:utext="${user.address}">abc</span>
+<br/>
+<br/>
+
+URL:<br/>
+<a href="http://www.baidu.com" th:href="@{${user.address}}">网站地址</a>
+<br/>
+
+<br/>
+<form th:action="@{/th/postform}" th:object="${user}" method="post" th:method="post">
+    <input type="text" th:field="*{username}"/>
+    <input type="text" th:field="*{address}"/>
+    <input type="submit"/>
+</form>
+<br/>
+
+<br/>
+<div th:if="${user.id} == 18">十八岁的天空</div>
+<div th:if="${user.id} gt 18">你老了</div>
+<div th:if="${user.id} lt 18">你很年轻</div>
+<div th:if="${user.id} ge 18">大于等于</div>
+<div th:if="${user.id} le 18">小于等于</div>
+<br/>
+
+<br/>
+<div th:unless="${user.id} == 18">十八岁的天空</div>
+<div th:unless="${user.id} gt 18">你老了</div>
+<div th:unless="${user.id} lt 18">你很年轻</div>
+<div th:unless="${user.id} ge 18">大于等于</div>
+<div th:unless="${user.id} le 18">小于等于</div>
+<br/>
+
+<br/>
+<select>
+     <option >选择框</option>
+     <option th:selected="${user.username eq 'zhangsan'}">zhangsan</option>
+     <option th:selected="${user.username eq 'lisi'}">lisi</option>
+     <option th:selected="${user.username eq 'wangwu'}">wangwu</option>
+</select>
+<br/>
+
+<br/>
+<input type="radio" th:checked="${user.sex eq 'nan'}"/>男
+<input type="radio" th:checked="${user.sex eq 'nv'}"/>女
+<br/>
+
+
+<br/>
+<table>
+    <tr>
+        <th>姓名</th>
+        <th>性别</th>
+        <th>id描述</th>
+        <th>生日</th>
+    </tr>
+    <tr th:each="person:${userList}">
+        <td th:text="${person.username}"></td>
+        <td th:text="${person.sex}"></td>
+        <td th:text="${person.id gt 18} ? id大于18 : id小于18">18岁</td>
+        <td th:text="${#dates.format(user.birthday, 'yyyy-MM-dd hh:mm:ss')}"></td>
+    </tr>
+</table>
+<br/>
+
+
+<br/>
+<div th:switch="${user.username}">
+  <p th:case="'zhangsan'">zhangsan</p>
+  <p th:case="'lisi'">lisi</p>
+  <p th:case="*">其他用户</p>
+</div>
+<br/>
+
+<br/>
+<div th:switch="${user.username}">
+  <p th:case="'lee'">lee</p>
+  <p th:case="#{roles.manager}">普通管理员</p>
+  <p th:case="#{roles.superadmin}">超级管理员</p>
+  <p th:case="*">其他用户</p>
+</div>
+<br/>
+<p th:utext="#{roles.manager}">xxxxxxx</p>
+</body>
+</html> 

@@ -1,8 +1,14 @@
 package cn.qlq.action;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.qlq.bean.User;
 
 /**
  * 返回freemarker相关页面
@@ -34,5 +40,40 @@ public class ThymeleafController {
 	@RequestMapping("/center")
 	public String center() {
 		return "thymeleaf/center/center";
+	}
+
+	/**
+	 * 会跳转到templates/thymeleaf/test.html
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/test")
+	public String test(ModelMap map) {
+		User user = new User();
+		user.setId(2);
+		user.setSex("nv");
+		user.setUsername("manager");
+		user.setAddress("http://qiaoliqiang.cn");
+		user.setBirthday(new Date());
+		map.addAttribute("user", user);
+		
+		User user2 = user;
+		List<User> userList = new ArrayList<>();
+		userList.add(user);
+		userList.add(user2);
+		
+		map.addAttribute("userList", userList);
+		return "thymeleaf/test";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/postform")
+	public String postform(User user) {
+		System.out.println(user.getUsername());
+		System.out.println(user.getAddress());
+		return "redirect:/th/test";
 	}
 }
