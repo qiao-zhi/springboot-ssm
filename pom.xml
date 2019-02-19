@@ -99,6 +99,12 @@
 			<artifactId>pagehelper</artifactId>
 			<version>5.1.2</version>
 		</dependency>
+
+		<!-- 引入 freemarker 模板依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<!-- 配置了很多插件 -->
