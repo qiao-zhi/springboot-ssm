@@ -18,7 +18,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<!-- 设置Tomcat打包的时候不打包下面配置 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -51,10 +51,6 @@
 			<artifactId>spring-tx</artifactId>
 			<version>4.3.7.RELEASE</version>
 		</dependency>
-
-
-
-
 
 		<!-- 基本配置 -->
 		<dependency>
@@ -123,7 +119,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-
 </project>
