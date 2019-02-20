@@ -11,14 +11,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 /**
- * Servlet Filter implementation class MyFilter
+ * 注解配置的filter执行顺序按类名的顺序执行
  */
 @WebFilter(filterName = "myFilter", urlPatterns = "/*")
 public class MyFilter implements Filter {
-
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		System.out.println("=========enter filter===========");
