@@ -1,4 +1,4 @@
-package cn.qlq.action;
+package cn.qlq.controller;
 
 import java.util.ArrayList;
 import java.util.List;

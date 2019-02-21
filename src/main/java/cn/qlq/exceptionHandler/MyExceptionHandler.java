@@ -1,4 +1,4 @@
-package cn.qlq.ExceptionHandler;
+package cn.qlq.exceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

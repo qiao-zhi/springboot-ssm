@@ -1,4 +1,4 @@
-package cn.qlq.action.system;
+package cn.qlq.controller.system;
 
 import javax.servlet.http.HttpSession;
 

@@ -1,4 +1,4 @@
-package cn.qlq.action;
+package cn.qlq.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.qlq.annotation.MyLogAnnotation;
 import cn.qlq.bean.user.User;
 import cn.qlq.service.user.UserService;
 import cn.qlq.utils.DefaultValue;
@@ -56,6 +57,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("getUsers")
+	@MyLogAnnotation(operateDescription = "分页查询用户")
 	@ResponseBody
 	public PageInfo<User> getUsers(@RequestParam Map condition) {
 		int pageNum = 1;

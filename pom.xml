@@ -57,6 +57,12 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 
+		<!-- 引入 spring aop 依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<!--pagehelper插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
