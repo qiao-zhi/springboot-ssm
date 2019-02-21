@@ -8,12 +8,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
 /**
  * 注解配置的filter执行顺序按类名的顺序执行
  */
-@WebFilter(filterName = "myFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "myFilter", urlPatterns = "/*")
 public class MyFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {

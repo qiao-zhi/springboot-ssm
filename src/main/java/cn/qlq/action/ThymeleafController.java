@@ -1,17 +1,16 @@
 package cn.qlq.action;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import cn.qlq.bean.User;
+import cn.qlq.bean.user.User;
 
 /**
- * 返回freemarker相关页面
+ * 返回Thymeleaf相关页面与Thymeleaf相关练习
  * 
  * @author Administrator
  *
@@ -54,14 +53,13 @@ public class ThymeleafController {
 		user.setSex("nv");
 		user.setUsername("manager");
 		user.setAddress("http://qiaoliqiang.cn");
-		user.setBirthday(new Date());
 		map.addAttribute("user", user);
-		
+
 		User user2 = user;
 		List<User> userList = new ArrayList<>();
 		userList.add(user);
 		userList.add(user2);
-		
+
 		map.addAttribute("userList", userList);
 		return "thymeleaf/test";
 	}

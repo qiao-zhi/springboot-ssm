@@ -2,7 +2,6 @@ package cn.qlq.config;
 
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import cn.qlq.listener.MyHttpSessionListener;
 import cn.qlq.listener.MyServletContextListener;
@@ -12,7 +11,7 @@ import cn.qlq.listener.MyServletContextListener;
  * @author Administrator
  *
  */
-@Configuration
+//@Configuration
 public class ListenerConfig {
 	@Bean
 	public ServletListenerRegistrationBean<MyHttpSessionListener> listenerRegist() {
