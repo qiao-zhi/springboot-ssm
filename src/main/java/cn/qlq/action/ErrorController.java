@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.qlq.utils.JSONResultUtil;
 
+/**
+ * 错误页面的测试
+ * 
+ * @author Administrator
+ *
+ */
 @Controller
 @RequestMapping("err")
 public class ErrorController {

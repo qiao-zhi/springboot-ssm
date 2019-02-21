@@ -8,9 +8,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
-@WebFilter(filterName = "myFilter2", urlPatterns = "/*")
+//@WebFilter(filterName = "myFilter2", urlPatterns = "/*")
 public class MyFilter2 implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

@@ -69,5 +69,4 @@ public class JSONResultUtil<T> implements Serializable {
 	public static JSONResultUtil error(String msg) {
 		return new JSONResultUtil(false, msg);
 	}
-
 }
