@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cn.qlq.bean.user.User;
+import cn.qlq.controller.mobile.MobileTokenController;
 
 /**
  * 登陆过滤器
@@ -25,6 +28,7 @@ import cn.qlq.bean.user.User;
  */
 @WebFilter(filterName = "loginFilter", urlPatterns = "/*")
 public class LoginFilter implements Filter {
+	private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
 	public LoginFilter() {
 	}
@@ -37,7 +41,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		String path = req.getRequestURI();
 		// 如果包含login或者访问静态资源就放行
-		if (StringUtils.containsIgnoreCase(path, "login") || path.contains("/static/")) {
+		if (StringUtils.containsIgnoreCase(path, "login") || path.contains("/static/")|| path.contains("/mobile/")) {
 			chain.doFilter(request, response); // 放行
 			return;
 		}

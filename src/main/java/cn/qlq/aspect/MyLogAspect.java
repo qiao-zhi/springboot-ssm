@@ -19,7 +19,7 @@ import cn.qlq.annotation.MyLogAnnotation;
  * @Date: 11:46 2018/5/14
  */
 @Component
-@Aspect
+//@Aspect
 public class MyLogAspect {
 	private final static Logger log = LoggerFactory.getLogger(MyLogAspect.class);
 

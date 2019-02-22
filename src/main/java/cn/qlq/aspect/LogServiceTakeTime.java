@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author QiaoLiQiang
  * @time 2019年2月21日下午9:20:15
  */
-@Aspect
+//@Aspect
 @Component
 public class LogServiceTakeTime {
 	private final static Logger log = LoggerFactory.getLogger(LogServiceTakeTime.class);
