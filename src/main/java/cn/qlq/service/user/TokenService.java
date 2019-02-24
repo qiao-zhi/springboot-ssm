@@ -21,4 +21,9 @@ public interface TokenService {
 	 * @return
 	 */
 	Token updateIfExistsTokenByTokenStr(String tokenStr);
+
+	/**
+	 * 删除无效的token
+	 */
+	void deleteInvalidToken();
 }

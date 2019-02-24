@@ -103,4 +103,12 @@ public class TokenServiceImpl implements TokenService {
 		return token;
 	}
 
+	@Override
+	public void deleteInvalidToken() {
+		TokenExample example = new TokenExample();
+		Criteria createCriteria = example.createCriteria();
+		createCriteria.andLosetimeLessThan(new Date());
+		tokenMapper.deleteByExample(example);
+	}
+
 }
