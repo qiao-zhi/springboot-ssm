@@ -6,9 +6,9 @@
         <meta name="renderer" content="webkit"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
-        <link rel="shortcut icon" href="/static/x-admin/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="/static/x-admin/css/font.css"/>
-        <link rel="stylesheet" href="/static/x-admin/css/xadmin.css"/>
+        <link rel="shortcut icon" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/favicon.ico'}" type="image/x-icon" />
+        <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/font.css'}"/>
+        <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/xadmin.css'}"/>
     </head>
     <body>
     <div class="x-body layui-anim layui-anim-up">

@@ -8,11 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/static/x-admin/css/font.css"/>
-    <link rel="stylesheet" href="/static/x-admin/css/xadmin.css"/>
+    <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/font.css'}"/>
+    <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/xadmin.css'}"/>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/x-admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/static/x-admin/js/xadmin.js"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/lib/layui/layui.js'}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/js/xadmin.js'}"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -90,7 +90,7 @@
           //监听提交
           form.on('submit(add)', function(data){
        	    //异步提交数据
-       	    $.post("/user/addUser.html",data.field,function(response){
+       	    $.post("user/addUser.html",data.field,function(response){
        	    	if(response.success == true){
        	    	  layer.msg("增加成功", {icon: 6},function () {
                       // 获得frame索引

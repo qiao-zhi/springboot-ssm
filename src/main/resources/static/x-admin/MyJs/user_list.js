@@ -5,7 +5,7 @@ $(function(){
 /*****S 分页查询相关方法**********/
 function queryUsersFY(){
     $.ajax({
-       url:"/user/getUsers.html",
+       url:"user/getUsers.html",
        data:$("#queryUserForm").serialize(),
        dataType:'json',
         type:'post',
@@ -102,7 +102,7 @@ function clearQueryCondition(obj) {
 function deleteUser(id){
 	var layer = layui.layer;
 	layer.confirm('确认删除?', function(index){
-		$.post("/user/deleteUser.html",{"id":id},function(result){
+		$.post("user/deleteUser.html",{"id":id},function(result){
 			if(result.success == true){
 				layer.msg("删除成功!");
 				queryUsersFY();
@@ -115,6 +115,6 @@ function deleteUser(id){
 }
 
 function updateUser(id){
-	var url = '/user/updateUser.html?id='+id;
+	var url = 'user/updateUser.html?id='+id;
 	x_admin_show('修改用户',url,600,400);
 }

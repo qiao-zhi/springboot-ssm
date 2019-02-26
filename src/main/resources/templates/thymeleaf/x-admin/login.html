@@ -9,14 +9,14 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/static/x-admin/css/font.css"/>
-	<link rel="stylesheet" href="/static/x-admin/css/xadmin.css"/>
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script src="/static/x-admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/static/x-admin/js/xadmin.js"></script>
+    <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/font.css'}"/>
+	<link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/xadmin.css'}"/>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/js/jquery.min.js'}"></script>
+    <script th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/lib/layui/layui.js'}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/js/xadmin.js'}"></script>
     
     
-    <script type="text/javascript" src="/static/x-admin/MyJs/login.js"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/login.js'}"></script>
 
 </head>
 <body class="login-bg">

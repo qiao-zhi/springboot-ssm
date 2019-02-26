@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="shortcut icon" href="/static/x-admin/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/static/x-admin/css/font.css"/>
-	<link rel="stylesheet" href="/static/x-admin/css/xadmin.css"/>
+    <link rel="shortcut icon" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/favicon.ico'}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/font.css'}"/>
+	<link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/xadmin.css'}"/>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/static/x-admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/static/x-admin/js/xadmin.js"></script>
+    <script th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/lib/layui/layui.js'}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/js/xadmin.js'}"></script>
     
     <!--自己写的JS  -->
-    <script type="text/javascript" src="/static/x-admin/MyJs/index.js"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/index.js'}"></script>
 </head>
 <body>
     <!-- 顶部开始 -->
