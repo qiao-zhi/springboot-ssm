@@ -9,6 +9,7 @@ import org.apache.commons.collections.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("getUsers")
+	@Cacheable(value = "usersCache", keyGenerator = "keyGenerator") // 在redis中开启key为findAllUser开头的存储空间。key和keyGenerator只能使用一个
 	@MyLogAnnotation(operateDescription = "分页查询用户")
 	@ResponseBody
 	public PageInfo<User> getUsers(@RequestParam Map condition) {
