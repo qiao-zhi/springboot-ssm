@@ -58,7 +58,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("getUsers")
-	@Cacheable(value = "usersCache", keyGenerator = "keyGenerator") // 在redis中开启key为findAllUser开头的存储空间。key和keyGenerator只能使用一个
+//	@Cacheable(value = "usersCache", keyGenerator = "keyGenerator") // 在redis中开启key为findAllUser开头的存储空间。key和keyGenerator只能使用一个
 	@MyLogAnnotation(operateDescription = "分页查询用户")
 	@ResponseBody
 	public PageInfo<User> getUsers(@RequestParam Map condition) {
