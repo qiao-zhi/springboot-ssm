@@ -11,9 +11,10 @@ public class FirstAnnotationJob {
 	public void cron() {
 		try {
 			Thread.sleep(2000);
+			System.out.println("spring anno task execute times " + count++);
 		} catch (InterruptedException e) {
 			System.err.println("InterruptedException " + e);
+			Thread.currentThread().interrupt();
 		}
-		System.out.println("spring anno task execute times " + count++);
 	}
 }

@@ -29,13 +29,11 @@ public class TokenServiceImpl implements TokenService {
 		Token token = findTokenByUsername(username);
 		// 1.1创建token并返回
 		if (token == null) {
-			token = generateAndSaveTokenByUserName(username);
-			return token;
+			return generateAndSaveTokenByUserName(username);
 		}
 
 		// 1.2根据失效时间更新且返回token
-		token = updateTokenByTokenLoseTime(token);
-		return token;
+		return updateTokenByTokenLoseTime(token);
 	}
 
 	@Override
