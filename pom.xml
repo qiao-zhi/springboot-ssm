@@ -51,6 +51,12 @@
 			<version>5.1.6</version>
 		</dependency>
 
+		<!-- springdata jpa依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
 		<!-- 使用事务需要引入这个包 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
