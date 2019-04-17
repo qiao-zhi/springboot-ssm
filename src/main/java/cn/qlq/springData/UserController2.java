@@ -2,6 +2,7 @@ package cn.qlq.springData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -19,6 +20,9 @@ public class UserController2 {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private User2Service user2Service;
+
 	@RequestMapping("addUser")
 	public String adduser() {
 		for (int i = 0; i < 5; i++) {
@@ -26,7 +30,7 @@ public class UserController2 {
 			user2.setAddress("add" + i);
 			user2.setUsername("username" + i);
 
-			userDao.save(user2);
+			user2Service.save(user2);
 		}
 
 		return "success";
@@ -123,6 +127,43 @@ public class UserController2 {
 		Page<User2> findAll = userDao.findAll(example, pageRequest);
 
 		return findAll;
+	}
+
+	@RequestMapping("getUser2ByUsernameAndAddress")
+	public User2 getUser2ByUsernameAndAddress() {
+		User2 findByUsernameAndAddress = userDao.findByUsernameAndAddress("username1", "add1");
+		System.err.println(findByUsernameAndAddress.getCountry());
+		return findByUsernameAndAddress;
+	}
+
+	@RequestMapping("findByUsernameLike")
+	public List<User2> findByUsernameLike() {
+		return userDao.findByUsernameLike("user%");
+	}
+
+	@RequestMapping("findByCountryId")
+	public List<User2> findByCountryId() {
+		return userDao.findByCountryId(1);
+	}
+
+	@RequestMapping("getUserByCondition")
+	public List<User2> getUserByCondition() {
+		return userDao.getUserByCondition("username3", "修改后地址");
+	}
+
+	@RequestMapping("getUserByUsername")
+	public List<User2> getUserByUsername() {
+		return userDao.getUserByUsername("usernam");
+	}
+
+	@RequestMapping("getUsersByUsername")
+	public List<User2> getUsersByUsername() {
+		return userDao.getUsersByUsername("usernam");
+	}
+
+	@RequestMapping("countByUsernameLike")
+	public long countByUsernameLike() {
+		return userDao.countByUsernameLike("user%");
 	}
 
 }

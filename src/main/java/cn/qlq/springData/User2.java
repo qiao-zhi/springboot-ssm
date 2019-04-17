@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User2 {
@@ -26,6 +28,10 @@ public class User2 {
 	private String sex;
 
 	private String address;
+
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	private Country country;
 
 	public Integer getId() {
 		return id;
@@ -89,6 +95,14 @@ public class User2 {
 
 	public void setAddress(String address) {
 		this.address = address == null ? null : address.trim();
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 	@Override
