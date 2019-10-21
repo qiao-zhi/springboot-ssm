@@ -40,8 +40,11 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		String path = req.getRequestURI();
+
 		// 如果包含login或者访问静态资源就放行
-		if (StringUtils.containsIgnoreCase(path, "login") || path.contains("/static/")|| path.contains("/mobile/")) {
+		if (StringUtils.containsIgnoreCase(path, "login") || path.contains("/static/") || path.contains("/mobile/")
+				|| path.contains("/weixin/")) {
+
 			chain.doFilter(request, response); // 放行
 			return;
 		}
