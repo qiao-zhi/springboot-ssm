@@ -1,5 +1,6 @@
 package cn.qlq.controller.weixin;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,8 @@ public class WeixinController {
 
 		logger.debug("signature: {}, timestamp: {}, nonce: {}, echostr: {}", signature, timestamp, nonce, echostr);
 
-		if (WeixinCheckUtils.checkSignature(signature, timestamp, nonce)) {
+		if (StringUtils.isNoneBlank(signature, timestamp, nonce)
+				&& WeixinCheckUtils.checkSignature(signature, timestamp, nonce)) {
 			return echostr;
 		}
 
