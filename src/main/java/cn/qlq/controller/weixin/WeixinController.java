@@ -71,13 +71,15 @@ public class WeixinController {
 			String message = null;
 			if ("text".equals(msgType)) {
 				TextMessage textMessage = new TextMessage();
-				// 回传消息，所以讲fromuser和toUser交换
+				// 回传消息，所以将fromuser和toUser交换
 				textMessage.setFromUserName(toUserName);
 				textMessage.setToUserName(fromUserName);
 				textMessage.setMsgType(msgType);
 				textMessage.setCreateTime(new Date().getTime());
-				textMessage.setContent("您发送的消息为: !" + content);
+				textMessage.setContent("您发送的消息为: " + content);
 				logger.info("textMessage: {}", textMessage);
+
+				message = MessageUtils.textMessageToXml(textMessage);
 			}
 
 			out.print(message);// 把消息发送到客户端
