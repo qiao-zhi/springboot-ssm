@@ -21,10 +21,10 @@ public class ActiveMQListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		try {
-			brokerService.setUseJmx(true);
-			brokerService.addConnector("tcp://localhost:61616");
-			brokerService.start();
-			System.out.println("broker 启动");
+			// brokerService.setUseJmx(true);
+			// brokerService.addConnector("tcp://localhost:61616");
+			// brokerService.start();
+			//System.out.println("broker 启动");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
