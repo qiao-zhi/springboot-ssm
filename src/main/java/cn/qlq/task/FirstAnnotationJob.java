@@ -3,7 +3,7 @@ package cn.qlq.task;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class FirstAnnotationJob {
 	private static int count;
 

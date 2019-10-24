@@ -2,7 +2,6 @@ package cn.qlq.controller.weixin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.qlq.bean.weixin.TextMessage;
+import cn.qlq.bean.weixin.AbstractMessage;
 import cn.qlq.controller.UserController;
+import cn.qlq.utils.weixin.MessageHandler;
 import cn.qlq.utils.weixin.MessageUtils;
 import cn.qlq.utils.weixin.WeixinCheckUtils;
 
@@ -57,32 +57,22 @@ public class WeixinController {
 	private void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		try {
-			Map<String, String> map = MessageUtils.xmlToMap(request);
-			String fromUserName = map.get("FromUserName");
-			String toUserName = map.get("ToUserName");
-			String msgType = map.get("MsgType");
-			String content = map.get("Content");
-			logger.info("map: {}", map);
+			// 消息转map
+			Map<String, Object> map = MessageUtils.xmlToMap(request);
+			logger.info("接收到的消息map: {}", map);
 
-			if (StringUtils.isNotBlank(content)) {
-				System.out.println("接收的的消息为:" + content + ",你可以根据关键字进行搜索或者做其他");
+			// 调用工具类处理完之后显示回传消息
+			AbstractMessage responseMessage = MessageHandler.handlMessage(map);
+			logger.info("回传的消息responseMessage: {}", responseMessage);
+
+			if (responseMessage == null) {
+				return;
 			}
 
-			String message = null;
-			if ("text".equals(msgType)) {
-				TextMessage textMessage = new TextMessage();
-				// 回传消息，所以将fromuser和toUser交换
-				textMessage.setFromUserName(toUserName);
-				textMessage.setToUserName(fromUserName);
-				textMessage.setMsgType(msgType);
-				textMessage.setCreateTime(new Date().getTime());
-				textMessage.setContent("您发送的消息为: " + content);
-				logger.info("textMessage: {}", textMessage);
-
-				message = MessageUtils.textMessageToXml(textMessage);
-			}
-
-			out.print(message);// 把消息发送到客户端
+			String messageToXml = MessageUtils.messageToXml(responseMessage);
+			String ss = "<xml><ToUserName>o_qAo0u6Snhoc7Z45RfSxYatMWpo</ToUserName><FromUserName>gh_fc4bd5c2fda8</FromUserName><CreateTime>1571913805366</CreateTime><MsgType>image</MsgType><Image><MediaId>Ykb6-rahsatzmKXBGkaFhqNjK7h_50j_ITvls3_kWEg-x91KEwSdNmIpfxeYIQfZ</MediaId></Image></xml>";
+			logger.info("回传的消息responseMessage messageToXml: {}", messageToXml);
+			out.print(ss);// 把消息发送到客户端
 		} catch (DocumentException e) {
 			logger.error("dispose post request error", e);
 		} finally {

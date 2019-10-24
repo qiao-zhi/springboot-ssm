@@ -1,12 +1,12 @@
 package cn.qlq.bean.weixin;
 
 /**
- * 文本消息
+ * 视频消息
  * 
  * @author Administrator
  *
  */
-public class TextMessage extends AbstractMessage {
+public class VideoMessage extends AbstractMessage {
 
 	/**
 	 * 开发者微信号
@@ -24,14 +24,19 @@ public class TextMessage extends AbstractMessage {
 	private long CreateTime;
 
 	/**
-	 * text
+	 * video
 	 */
 	private String MsgType;
 
 	/**
-	 * 文本消息内容
+	 * 视频消息媒体id，可以调用获取临时素材接口拉取数据。
 	 */
-	private String Content;
+	private String MediaId;
+
+	/**
+	 * 视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+	 */
+	private String ThumbMediaId;
 
 	/**
 	 * 消息id，64位整型
@@ -70,14 +75,6 @@ public class TextMessage extends AbstractMessage {
 		MsgType = msgType;
 	}
 
-	public String getContent() {
-		return Content;
-	}
-
-	public void setContent(String content) {
-		Content = content;
-	}
-
 	public String getMsgId() {
 		return MsgId;
 	}
@@ -86,10 +83,27 @@ public class TextMessage extends AbstractMessage {
 		MsgId = msgId;
 	}
 
+	public String getMediaId() {
+		return MediaId;
+	}
+
+	public void setMediaId(String mediaId) {
+		MediaId = mediaId;
+	}
+
+	public String getThumbMediaId() {
+		return ThumbMediaId;
+	}
+
+	public void setThumbMediaId(String thumbMediaId) {
+		ThumbMediaId = thumbMediaId;
+	}
+
 	@Override
 	public String toString() {
-		return "TextMessage [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime=" + CreateTime
-				+ ", MsgType=" + MsgType + ", Content=" + Content + ", MsgId=" + MsgId + "]";
+		return "VideoMessage [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime="
+				+ CreateTime + ", MsgType=" + MsgType + ", MediaId=" + MediaId + ", ThumbMediaId=" + ThumbMediaId
+				+ ", MsgId=" + MsgId + "]";
 	}
 
 }

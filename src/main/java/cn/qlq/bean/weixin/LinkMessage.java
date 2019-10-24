@@ -1,12 +1,12 @@
 package cn.qlq.bean.weixin;
 
 /**
- * 文本消息
+ * 链接消息
  * 
  * @author Administrator
  *
  */
-public class TextMessage extends AbstractMessage {
+public class LinkMessage extends AbstractMessage {
 
 	/**
 	 * 开发者微信号
@@ -24,14 +24,24 @@ public class TextMessage extends AbstractMessage {
 	private long CreateTime;
 
 	/**
-	 * text
+	 * link
 	 */
 	private String MsgType;
 
 	/**
-	 * 文本消息内容
+	 * 消息标题
 	 */
-	private String Content;
+	private String Title;
+
+	/**
+	 * 消息描述
+	 */
+	private String Description;
+
+	/**
+	 * 消息链接
+	 */
+	private String Url;
 
 	/**
 	 * 消息id，64位整型
@@ -70,14 +80,6 @@ public class TextMessage extends AbstractMessage {
 		MsgType = msgType;
 	}
 
-	public String getContent() {
-		return Content;
-	}
-
-	public void setContent(String content) {
-		Content = content;
-	}
-
 	public String getMsgId() {
 		return MsgId;
 	}
@@ -86,10 +88,35 @@ public class TextMessage extends AbstractMessage {
 		MsgId = msgId;
 	}
 
+	public String getTitle() {
+		return Title;
+	}
+
+	public void setTitle(String title) {
+		Title = title;
+	}
+
+	public String getDescription() {
+		return Description;
+	}
+
+	public void setDescription(String description) {
+		Description = description;
+	}
+
+	public String getUrl() {
+		return Url;
+	}
+
+	public void setUrl(String url) {
+		Url = url;
+	}
+
 	@Override
 	public String toString() {
-		return "TextMessage [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime=" + CreateTime
-				+ ", MsgType=" + MsgType + ", Content=" + Content + ", MsgId=" + MsgId + "]";
+		return "LinkMessage [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime=" + CreateTime
+				+ ", MsgType=" + MsgType + ", Title=" + Title + ", Description=" + Description + ", Url=" + Url
+				+ ", MsgId=" + MsgId + "]";
 	}
 
 }
