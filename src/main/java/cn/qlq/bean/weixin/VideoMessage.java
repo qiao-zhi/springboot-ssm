@@ -6,7 +6,7 @@ package cn.qlq.bean.weixin;
  * @author Administrator
  *
  */
-public class VideoMessage extends AbstractMessage {
+public class VideoMessage {
 
 	/**
 	 * 开发者微信号

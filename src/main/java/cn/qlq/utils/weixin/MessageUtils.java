@@ -15,8 +15,8 @@ import org.dom4j.io.SAXReader;
 
 import com.thoughtworks.xstream.XStream;
 
-import cn.qlq.bean.weixin.AbstractMessage;
-import cn.qlq.bean.weixin.TextMessage;
+import cn.qlq.bean.weixin.response.AbstractResponseMessage;
+import cn.qlq.bean.weixin.response.TextResponseMessage;
 
 public class MessageUtils {
 
@@ -52,10 +52,13 @@ public class MessageUtils {
 	 * @param message
 	 * @return
 	 */
-	public static String messageToXml(AbstractMessage message) {
+	public static String messageToXml(AbstractResponseMessage message) {
 		XStream xStream = new XStream();
 		// 将xml的根元素替换成xml
 		xStream.alias("xml", message.getClass());
+		xStream.alias("item", cn.qlq.bean.weixin.response.NewsResponseMessageArticleItem.class);
+		xStream.addImplicitArray(cn.qlq.bean.weixin.response.NewsResponseMessageArticle.class, "items");
+
 		return xStream.toXML(message);
 	}
 
@@ -65,7 +68,7 @@ public class MessageUtils {
 	 * @param message
 	 * @return
 	 */
-	public static String messageToXml2(AbstractMessage message) {
+	public static String messageToXml2(AbstractResponseMessage message) {
 		XStream xStream = new XStream();
 		// 将xml的根元素替换成xml
 		xStream.alias("xml", message.getClass());
@@ -94,15 +97,15 @@ public class MessageUtils {
 	 * @param content
 	 * @return
 	 */
-	public static TextMessage initTextMessage(String fromUserName, String toUserName, String content) {
-		TextMessage textMessage = new TextMessage();
-		textMessage.setFromUserName(fromUserName);
-		textMessage.setToUserName(toUserName);
-		textMessage.setMsgType(MessageHandler.MESSAGE_TEXT);
-		textMessage.setCreateTime(System.currentTimeMillis());
-		textMessage.setContent(content);
+	public static TextResponseMessage initTextMessage(String fromUserName, String toUserName, String content) {
+		TextResponseMessage textResponseMessage = new TextResponseMessage();
+		textResponseMessage.setFromUserName(fromUserName);
+		textResponseMessage.setToUserName(toUserName);
+		textResponseMessage.setMsgType(MessageHandler.MESSAGE_TEXT);
+		textResponseMessage.setCreateTime(System.currentTimeMillis());
+		textResponseMessage.setContent(content);
 
-		return textMessage;
+		return textResponseMessage;
 	}
 
 }

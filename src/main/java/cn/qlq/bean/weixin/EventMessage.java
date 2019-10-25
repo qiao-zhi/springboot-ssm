@@ -6,7 +6,7 @@ package cn.qlq.bean.weixin;
  * @author Administrator
  *
  */
-public class EventMessage extends AbstractMessage {
+public class EventMessage {
 
 	/**
 	 * 开发者微信号

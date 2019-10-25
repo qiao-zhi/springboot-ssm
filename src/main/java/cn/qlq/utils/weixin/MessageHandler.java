@@ -5,19 +5,22 @@ import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.omg.CORBA.PRIVATE_MEMBER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cn.qlq.bean.weixin.AbstractMessage;
 import cn.qlq.bean.weixin.EventMessage;
 import cn.qlq.bean.weixin.ImageMessage;
-import cn.qlq.bean.weixin.ImageMessageResponse;
 import cn.qlq.bean.weixin.LinkMessage;
 import cn.qlq.bean.weixin.LocationMessage;
 import cn.qlq.bean.weixin.TextMessage;
 import cn.qlq.bean.weixin.VideoMessage;
 import cn.qlq.bean.weixin.VoiceMessage;
+import cn.qlq.bean.weixin.response.AbstractResponseMessage;
+import cn.qlq.bean.weixin.response.ImageResponseMessage;
+import cn.qlq.bean.weixin.response.NewsResponseMessage;
+import cn.qlq.bean.weixin.response.NewsResponseMessageArticle;
+import cn.qlq.bean.weixin.response.NewsResponseMessageArticleItem;
+import cn.qlq.bean.weixin.response.TextResponseMessage;
 import cn.qlq.utils.BeanUtils;
 
 public class MessageHandler {
@@ -36,7 +39,7 @@ public class MessageHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
-	public static AbstractMessage handlMessage(Map<String, Object> messageMap) {
+	public static AbstractResponseMessage handlMessage(Map<String, Object> messageMap) {
 		if (MapUtils.isEmpty(messageMap)) {
 			logger.error("message is empty");
 			return null;
@@ -62,7 +65,7 @@ public class MessageHandler {
 		return null;
 	}
 
-	private static AbstractMessage handleVideoMessage(Map<String, Object> messageMap) {
+	private static AbstractResponseMessage handleVideoMessage(Map<String, Object> messageMap) {
 		VideoMessage message = BeanUtils.map2Bean(messageMap, VideoMessage.class, true);
 
 		String thumbMediaId = message.getThumbMediaId();
@@ -75,7 +78,7 @@ public class MessageHandler {
 		return MessageUtils.initTextMessage(message.getToUserName(), message.getFromUserName(), responseMsg);
 	}
 
-	private static AbstractMessage handleVoiceMessage(Map<String, Object> messageMap) {
+	private static AbstractResponseMessage handleVoiceMessage(Map<String, Object> messageMap) {
 		VoiceMessage message = BeanUtils.map2Bean(messageMap, VoiceMessage.class, true);
 
 		String recognition = message.getRecognition();
@@ -90,12 +93,12 @@ public class MessageHandler {
 	}
 
 	/**
-	 * 处理链接消息
+	 * 处理链接消息(回复一条图文消息)
 	 * 
 	 * @param message
 	 * @return
 	 */
-	private static AbstractMessage handleLinkMessage(Map<String, Object> messageMap) {
+	private static AbstractResponseMessage handleLinkMessage(Map<String, Object> messageMap) {
 		LinkMessage message = BeanUtils.map2Bean(messageMap, LinkMessage.class, true);
 
 		String desc = message.getDescription();
@@ -106,8 +109,28 @@ public class MessageHandler {
 			System.out.println("您接收到链接消息， title: " + title + ", desc: " + desc + ", url: " + url);
 		}
 
-		String responseMsg = "您发送了一条链接消息，title: " + title + " \n " + "desc: " + desc + " \n " + "url: " + url;
-		return MessageUtils.initTextMessage(message.getToUserName(), message.getFromUserName(), responseMsg);
+		// 回复一条图文消息
+		NewsResponseMessage news = new NewsResponseMessage();
+		news.setCreateTime(System.currentTimeMillis());
+		news.setFromUserName(message.getToUserName());
+		news.setToUserName(message.getFromUserName());
+		news.setArticleCount("1");
+
+		NewsResponseMessageArticle article = new NewsResponseMessageArticle();
+		news.setArticles(article);
+
+		// 创建多条图文消息
+		for (int i = 0; i < 1; i++) {
+			NewsResponseMessageArticleItem item = new NewsResponseMessageArticleItem();
+			item.setTitle("标题");
+			item.setPicUrl("https://www.cnblogs.com/qlqwjy/gallery/image/190591.html");
+			item.setUrl("https://www.cnblogs.com/qlqwjy/p/8929929.html");
+			item.setDescription("描述信息");
+
+			article.addNewsResponseMessageArticleItem(item);
+		}
+
+		return news;
 	}
 
 	/**
@@ -116,7 +139,7 @@ public class MessageHandler {
 	 * @param messageMap
 	 * @return
 	 */
-	private static AbstractMessage handleEventMessage(Map<String, Object> messageMap) {
+	private static AbstractResponseMessage handleEventMessage(Map<String, Object> messageMap) {
 		EventMessage message = BeanUtils.map2Bean(messageMap, EventMessage.class, true);
 
 		String event = message.getEvent();
@@ -138,7 +161,7 @@ public class MessageHandler {
 		}
 	}
 
-	private static AbstractMessage handleLocationMessage(Map<String, Object> messageMap) {
+	private static AbstractResponseMessage handleLocationMessage(Map<String, Object> messageMap) {
 		LocationMessage message = BeanUtils.map2Bean(messageMap, LocationMessage.class, true);
 
 		String label = message.getLabel();
@@ -151,12 +174,12 @@ public class MessageHandler {
 	}
 
 	/**
-	 * 处理图片消息
+	 * 处理图片消息(回复一条图片消息)
 	 * 
 	 * @param message
 	 * @return
 	 */
-	private static AbstractMessage handleImageMessage(Map<String, Object> message) {
+	private static AbstractResponseMessage handleImageMessage(Map<String, Object> message) {
 		ImageMessage imageMessage = BeanUtils.map2Bean(message, ImageMessage.class, true);
 
 		String url = imageMessage.getPicUrl();
@@ -165,11 +188,8 @@ public class MessageHandler {
 			System.out.println("您接收到的图片消息url为: " + url);
 		}
 
-		// 回传一条文本消息
-		// String responseMsg = "您的图片已上传至: " + url;
-		// return MessageUtils.initTextMessage(imageMessage.getToUserName(),
-		// imageMessage.getFromUserName(), responseMsg);
-		ImageMessageResponse responseMessage = new ImageMessageResponse();
+		// 回传一条图片消息
+		ImageResponseMessage responseMessage = new ImageResponseMessage();
 		responseMessage.setCreateTime(System.currentTimeMillis());
 		responseMessage.setFromUserName(imageMessage.getToUserName());
 		responseMessage.setToUserName(imageMessage.getFromUserName());
@@ -185,7 +205,7 @@ public class MessageHandler {
 	 * @param message
 	 * @return
 	 */
-	private static AbstractMessage handleTextMessage(Map<String, Object> message) {
+	private static AbstractResponseMessage handleTextMessage(Map<String, Object> message) {
 		TextMessage textMessage = BeanUtils.map2Bean(message, TextMessage.class, true);
 
 		String content = textMessage.getContent();
@@ -195,7 +215,7 @@ public class MessageHandler {
 		}
 
 		// 设置回传的消息内容
-		TextMessage responseMessage = new TextMessage();
+		TextResponseMessage responseMessage = new TextResponseMessage();
 		responseMessage.setContent("服务器已接收到您的消息，内容为: " + content);
 		responseMessage.setCreateTime(new Date().getTime());
 		responseMessage.setFromUserName(textMessage.getToUserName());

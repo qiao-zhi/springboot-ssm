@@ -6,7 +6,7 @@ package cn.qlq.bean.weixin;
  * @author Administrator
  *
  */
-public class LinkMessage extends AbstractMessage {
+public class LinkMessage {
 
 	/**
 	 * 开发者微信号

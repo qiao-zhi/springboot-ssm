@@ -6,7 +6,7 @@ package cn.qlq.bean.weixin;
  * @author Administrator
  *
  */
-public class LocationMessage extends AbstractMessage {
+public class LocationMessage {
 
 	/**
 	 * 开发者微信号

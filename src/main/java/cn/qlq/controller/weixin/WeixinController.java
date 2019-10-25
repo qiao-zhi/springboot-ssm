@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import cn.qlq.bean.weixin.AbstractMessage;
+import cn.qlq.bean.weixin.response.AbstractResponseMessage;
 import cn.qlq.controller.UserController;
 import cn.qlq.utils.weixin.MessageHandler;
 import cn.qlq.utils.weixin.MessageUtils;
@@ -62,7 +62,7 @@ public class WeixinController {
 			logger.info("接收到的消息map: {}", map);
 
 			// 调用工具类处理完之后显示回传消息
-			AbstractMessage responseMessage = MessageHandler.handlMessage(map);
+			AbstractResponseMessage responseMessage = MessageHandler.handlMessage(map);
 			logger.info("回传的消息responseMessage: {}", responseMessage);
 
 			if (responseMessage == null) {
@@ -70,9 +70,8 @@ public class WeixinController {
 			}
 
 			String messageToXml = MessageUtils.messageToXml(responseMessage);
-			String ss = "<xml><ToUserName>o_qAo0u6Snhoc7Z45RfSxYatMWpo</ToUserName><FromUserName>gh_fc4bd5c2fda8</FromUserName><CreateTime>1571913805366</CreateTime><MsgType>image</MsgType><Image><MediaId>Ykb6-rahsatzmKXBGkaFhqNjK7h_50j_ITvls3_kWEg-x91KEwSdNmIpfxeYIQfZ</MediaId></Image></xml>";
 			logger.info("回传的消息responseMessage messageToXml: {}", messageToXml);
-			out.print(ss);// 把消息发送到客户端
+			out.print(messageToXml);// 把消息发送到客户端
 		} catch (DocumentException e) {
 			logger.error("dispose post request error", e);
 		} finally {

@@ -1,37 +1,31 @@
-package cn.qlq.bean.weixin;
+package cn.qlq.bean.weixin.response;
 
 /**
- * 图片消息(回复)
+ * 抽象消息
  * 
  * @author Administrator
  *
  */
-public class ImageMessageResponse extends AbstractMessage {
-
+public abstract class AbstractResponseMessage {
 	/**
 	 * 开发者微信号
 	 */
-	private String ToUserName;
+	protected String ToUserName;
 
 	/**
 	 * 发送方帐号（一个OpenID）
 	 */
-	private String FromUserName;
+	protected String FromUserName;
 
 	/**
 	 * 消息创建时间 （整型）
 	 */
-	private long CreateTime;
+	protected long CreateTime;
 
 	/**
-	 * image
+	 * 
 	 */
-	private String MsgType;
-
-	/**
-	 * 图片消息媒体id，可以调用获取临时素材接口拉取数据。
-	 */
-	private String MediaId;
+	protected String MsgType;
 
 	public String getToUserName() {
 		return ToUserName;
@@ -63,20 +57,6 @@ public class ImageMessageResponse extends AbstractMessage {
 
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
-	}
-
-	public String getMediaId() {
-		return MediaId;
-	}
-
-	public void setMediaId(String mediaId) {
-		MediaId = mediaId;
-	}
-
-	@Override
-	public String toString() {
-		return "ImageMessageResponse [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime="
-				+ CreateTime + ", MsgType=" + MsgType + ", MediaId=" + MediaId + "]";
 	}
 
 }
