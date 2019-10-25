@@ -115,6 +115,7 @@ public class MessageHandler {
 		news.setFromUserName(message.getToUserName());
 		news.setToUserName(message.getFromUserName());
 		news.setArticleCount("1");
+		news.setMsgType("news");
 
 		NewsResponseMessageArticle article = new NewsResponseMessageArticle();
 		news.setArticles(article);
@@ -122,10 +123,10 @@ public class MessageHandler {
 		// 创建多条图文消息
 		for (int i = 0; i < 1; i++) {
 			NewsResponseMessageArticleItem item = new NewsResponseMessageArticleItem();
-			item.setTitle("标题");
-			item.setPicUrl("https://www.cnblogs.com/qlqwjy/gallery/image/190591.html");
-			item.setUrl("https://www.cnblogs.com/qlqwjy/p/8929929.html");
-			item.setDescription("描述信息");
+			item.setTitle("18年写的面试心得");
+			item.setPicUrl("https://images.cnblogs.com/cnblogs_com/qlqwjy/1031659/o_9.bmp");
+			item.setUrl("https://www.cnblogs.com/qlqwjy/p/9194434.html");
+			item.setDescription("18年毕设心血来潮写的毕设心得，1年后再看有点东西。");
 
 			article.addNewsResponseMessageArticleItem(item);
 		}
