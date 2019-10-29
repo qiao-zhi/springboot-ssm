@@ -8,13 +8,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -25,7 +23,17 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpClientUploadFile {
 
-	public static String uploadFile(String filePath, String url) {
+	/**
+	 * 
+	 * @param url
+	 *            上传的URL
+	 * @param filePath
+	 *            本地路径
+	 * @param fileName
+	 *            上传的name(相当于input框的name属性)
+	 * @return
+	 */
+	public static String uploadFile(String url, String filePath, String fileName) {
 		CloseableHttpClient httpclient = HttpClientBuilder.create().build();
 		CloseableHttpResponse response = null;
 		String result = "";
@@ -34,16 +42,15 @@ public class HttpClientUploadFile {
 
 			// 可以选择文件，也可以选择附加的参数
 			HttpEntity req = MultipartEntityBuilder.create().setMode(HttpMultipartMode.BROWSER_COMPATIBLE)
-					.addPart("docUpload", new FileBody(new File(filePath)))// 上传文件,如果不需要上传文件注掉此行
+					.addPart(fileName, new FileBody(new File(filePath)))// 上传文件,如果不需要上传文件注掉此行
 					.build();
 			httppost.setEntity(req);
 
 			response = httpclient.execute(httppost);
 
 			HttpEntity re = response.getEntity();
-			System.out.println(response.getStatusLine());
 			if (re != null) {
-				result = "Response content: " + new BufferedReader(new InputStreamReader(re.getContent())).readLine();
+				result = new BufferedReader(new InputStreamReader(re.getContent())).readLine();
 			}
 			EntityUtils.consume(re);
 		} catch (Exception e) {
