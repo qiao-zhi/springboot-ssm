@@ -9,7 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
-import cn.qlq.utils.HttpClientUploadFile;
+import cn.qlq.bean.weixin.menu.Button;
+import cn.qlq.bean.weixin.menu.ClickButton;
+import cn.qlq.bean.weixin.menu.Menu;
+import cn.qlq.bean.weixin.menu.ViewButton;
 import cn.qlq.utils.HttpUtils;
 
 public class WeixinInterfaceUtils {
@@ -36,25 +39,39 @@ public class WeixinInterfaceUtils {
 	 */
 	public static String URL_GET__TEMPEORARY_MATERIAL = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
 
+	/**
+	 * 获取用户信息
+	 */
+	public static String URL_GET__USER_INFO = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
+
+	/**
+	 * 创建菜单
+	 */
+	public static String URL_CREATE_MENU = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
+
+	/**
+	 * 获取菜单
+	 */
+	public static String URL_GET_MENU = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=ACCESS_TOKEN";
+
 	public static String getAccessToken() {
 
-		// Map<String, Object> param = new HashMap<>();
-		// param.put("grant_type", "client_credential");
-		// param.put("appid", "wx7d2efbe51db6f1e9");
-		// param.put("secret", "7a38556ae47b7eb185097f6f61444377");
-		//
-		// String responseStr = HttpUtils.doGetWithParams(ACCESS_TOKEN_URL,
-		// param);
-		// if (StringUtils.isNotBlank(responseStr)) {
-		// JSONObject parseObject = JSONObject.parseObject(responseStr);
-		// if (parseObject.containsKey("access_token")) {
-		// return parseObject.getString("access_token");
-		// }
-		//
-		// return "";
-		// }
+		Map<String, Object> param = new HashMap<>();
+		param.put("grant_type", "client_credential");
+		param.put("appid", "1wx7d2efbe51db6f1e922");
+		param.put("secret", "17a38556ae47b7eb185097f6f6144437722");
 
-		return "26_afp945RcqvIYUDRAG4_hO5PloOWDW9mXaXT4-jN0OHQMmVu7HzsPBl8Yx4DFNV76cmjkA6KML7K7yrkTmi1DX3GIZ0vNKlvxEQtfi-WQngKVz7AFjfbrRvjMadc0PTb4mKfEZWeAoKZ9xCM-SVNiAHAMPH";
+		String responseStr = HttpUtils.doGetWithParams(ACCESS_TOKEN_URL, param);
+		if (StringUtils.isNotBlank(responseStr)) {
+			JSONObject parseObject = JSONObject.parseObject(responseStr);
+			if (parseObject.containsKey("access_token")) {
+				return parseObject.getString("access_token");
+			}
+
+			return "";
+		}
+
+		return "";
 	}
 
 	/**
@@ -69,7 +86,7 @@ public class WeixinInterfaceUtils {
 	public static JSONObject uploadTemporaryMaterial(String filePath, String type) {
 		String replacedUrl = URL_UPLOAD__TEMPEORARY_MATERIAL.replace("ACCESS_TOKEN", getAccessToken()).replace("TYPE",
 				type);
-		String uploadFileResult = HttpClientUploadFile.uploadFile(replacedUrl, filePath, "media");
+		String uploadFileResult = HttpUtils.uploadFile(replacedUrl, filePath, "media");
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}
@@ -89,7 +106,7 @@ public class WeixinInterfaceUtils {
 	public static JSONObject uploadPermanentMaterial(String filePath, String type) {
 		String replacedUrl = URL_UPLOAD__PERMANENT_MATERIAL.replace("ACCESS_TOKEN", getAccessToken()).replace("TYPE",
 				type);
-		String uploadFileResult = HttpClientUploadFile.uploadFile(replacedUrl, filePath, "media");
+		String uploadFileResult = HttpUtils.uploadFile(replacedUrl, filePath, "media");
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}
@@ -151,8 +168,113 @@ public class WeixinInterfaceUtils {
 		return null;
 	}
 
+	/**
+	 * 获取用户信息
+	 * 
+	 * @param openId
+	 *            普通用户的标识，对当前公众号唯一
+	 * @return JSON数据格式的用户信息
+	 */
+	public static JSONObject userInfo(String openId) {
+		String replacedUrl = URL_GET__USER_INFO.replace("ACCESS_TOKEN", getAccessToken()).replace("OPENID", openId);
+		String uploadFileResult = HttpUtils.doGet(replacedUrl, null);
+		if (StringUtils.isNotBlank(uploadFileResult)) {
+			return JSONObject.parseObject(uploadFileResult);
+		}
+
+		return null;
+	}
+
+	/**
+	 * 创建菜单
+	 * 
+	 * @param menu
+	 *            JSON格式的菜单数据
+	 * @return
+	 */
+	public static JSONObject createMenu(String menu) {
+		String replacedUrl = URL_CREATE_MENU.replace("ACCESS_TOKEN", getAccessToken());
+		String uploadFileResult = HttpUtils.doPost(replacedUrl, menu);
+		if (StringUtils.isNotBlank(uploadFileResult)) {
+			return JSONObject.parseObject(uploadFileResult);
+		}
+
+		return null;
+	}
+
+	/**
+	 * 获取自定义菜单
+	 * 
+	 * @return
+	 */
+	public static JSONObject getMenu() {
+		String replacedUrl = URL_GET_MENU.replace("ACCESS_TOKEN", getAccessToken());
+		String uploadFileResult = HttpUtils.doGet(replacedUrl, null);
+		if (StringUtils.isNotBlank(uploadFileResult)) {
+			return JSONObject.parseObject(uploadFileResult);
+		}
+
+		return null;
+	}
+
+	/**
+	 * 组装菜单
+	 * 
+	 * @return
+	 */
+	private static Menu initMenu() {
+		Menu menu = new Menu();
+		ClickButton button11 = new ClickButton();
+		button11.setName("click菜单");
+		button11.setType("click");
+		button11.setKey("11");
+
+		ViewButton button21 = new ViewButton();
+		button21.setName("view菜单");
+		button21.setType("view");
+		button21.setUrl("http://b4a819d0.ngrok.io/index.html");
+
+		ClickButton button31 = new ClickButton();
+		button31.setName("扫码事件");
+		button31.setType("scancode_push");
+		button31.setKey("31");
+
+		ClickButton button32 = new ClickButton();
+		button32.setName("地理位置");
+		button32.setType("location_select");
+		button32.setKey("32");
+
+		Button button = new Button();
+		button.setName("菜单");
+		button.setSub_button(new Button[] { button31, button32 });
+
+		menu.setButton(new Button[] { button11, button21, button });
+		return menu;
+	}
+
 	public static void main(String[] args) {
-		uploadPermanentMaterialTest();
+		getMenuMenuTest();
+	}
+
+	private static void getMenuMenuTest() {
+		JSONObject menu = getMenu();
+		System.out.println(menu);
+	}
+
+	private static void createMenuTest() {
+		Menu initMenu = initMenu();
+		JSONObject createMenu = createMenu(JSONObject.toJSONString(initMenu));
+		System.out.println(createMenu);
+	}
+
+	private static void userInfoTest() {
+		JSONObject userInfo = userInfo("o_KK7s3-B6HhwSW7hVEAt4DK329s");
+		System.out.println(userInfo);
+	}
+
+	private static void uploadTemporaryMaterialTest() {
+		JSONObject uploadPermanentMaterial = uploadTemporaryMaterial("G:/yzm.png", "image");
+		System.out.println(uploadPermanentMaterial);
 	}
 
 	private static void uploadPermanentNewsTest() {
@@ -168,7 +290,7 @@ public class WeixinInterfaceUtils {
 	}
 
 	private static void uploadPermanentMaterialTest() {
-		JSONObject uploadPermanentMaterial = uploadPermanentMaterial("G:/0101.jpg", "image");
+		JSONObject uploadPermanentMaterial = uploadPermanentMaterial("G:/yzm.png", "image");
 		System.out.println(uploadPermanentMaterial);
 	}
 }
