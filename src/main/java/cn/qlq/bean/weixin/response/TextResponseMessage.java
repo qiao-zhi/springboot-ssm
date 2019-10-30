@@ -1,7 +1,7 @@
 package cn.qlq.bean.weixin.response;
 
 /**
- * 文字消息(图片)
+ * 文字消息
  * 
  * @author Administrator
  *

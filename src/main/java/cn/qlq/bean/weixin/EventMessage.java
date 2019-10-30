@@ -11,27 +11,27 @@ public class EventMessage {
 	/**
 	 * 开发者微信号
 	 */
-	private String ToUserName;
+	protected String ToUserName;
 
 	/**
 	 * 发送方帐号（一个OpenID）
 	 */
-	private String FromUserName;
+	protected String FromUserName;
 
 	/**
 	 * 消息创建时间 （整型）
 	 */
-	private long CreateTime;
+	protected long CreateTime;
 
 	/**
 	 * event
 	 */
-	private String MsgType;
+	protected String MsgType;
 
 	/**
-	 * 事件类型subscribe(订阅)、unsubscribe(取消订阅)
+	 * 事件类型subscribe(订阅)、unsubscribe(取消订阅),CLICK(点击事件),VIEW(点击菜单跳转链接)
 	 */
-	private String Event;
+	protected String Event;
 
 	public String getToUserName() {
 		return ToUserName;

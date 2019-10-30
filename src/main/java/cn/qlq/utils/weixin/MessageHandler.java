@@ -8,9 +8,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.qlq.bean.weixin.ClickViewEventMessage;
 import cn.qlq.bean.weixin.EventMessage;
 import cn.qlq.bean.weixin.ImageMessage;
 import cn.qlq.bean.weixin.LinkMessage;
+import cn.qlq.bean.weixin.LocationEventMessage;
 import cn.qlq.bean.weixin.LocationMessage;
 import cn.qlq.bean.weixin.TextMessage;
 import cn.qlq.bean.weixin.VideoMessage;
@@ -30,12 +32,13 @@ public class MessageHandler {
 	public static final String MESSAGE_VOICE = "voice";
 	public static final String MESSAGE_VIDEO = "video";
 	public static final String MESSAGE_LINK = "link";
-	public static final String MESSAGE_LOCATION = "location";
+	public static final String MESSAGE_LOCATION = "location";// 位置消息，点击发送位置
 	public static final String MESSAGE_EVENT = "event";// 事件
 	public static final String MESSAGE_SUBSCRIBE = "subscribe";// 关注
 	public static final String MESSAGE_UNSUBSCRIBE = "unsubscribe";// 取消关注
-	public static final String MESSAGE_CLICK = "CLICK";
-	public static final String MESSAGE_VIEW = "VIEW";
+	public static final String MESSAGE_EVENT_CLICK = "CLICK";
+	public static final String MESSAGE_EVENT_VIEW = "VIEW";
+	public static final String MESSAGE_EVENT_LOCATION = "LOCATION";// 位置事件，用户允许公众号获取位置
 
 	private static final Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
@@ -142,24 +145,52 @@ public class MessageHandler {
 	 */
 	private static AbstractResponseMessage handleEventMessage(Map<String, Object> messageMap) {
 		EventMessage message = BeanUtils.map2Bean(messageMap, EventMessage.class, true);
-
 		String event = message.getEvent();
 		if (StringUtils.isNotBlank(event)) {
 			System.out.println("您接收到事件消息， 事件类型为: " + event);
 		}
 
+		// 关注的时候
 		if (MESSAGE_SUBSCRIBE.equals(event)) {
-			// 关注的时候
 			System.out.println("这里可以向数据库插入数据");
 
 			String responseMsg = MessageUtils.subscribeWelcomeText();
 			return MessageUtils.initTextMessage(message.getToUserName(), message.getFromUserName(), responseMsg);
-		} else {
-			// 取消关注(不用回传消息.需要将用户产生的数据删除)
-			System.out.println("这时需要从数据删除  " + message.getFromUserName() + " 用户产生的相关数据");
+		}
 
+		// 取消关注(不用回传消息.需要将用户产生的数据删除)
+		if (MESSAGE_SUBSCRIBE.equals(event)) {
+			System.out.println("这时需要从数据删除  " + message.getFromUserName() + " 用户产生的相关数据");
 			return null;
 		}
+
+		// 点击自定义的点击菜单事件
+		if (MESSAGE_EVENT_CLICK.equals(event)) {
+			ClickViewEventMessage map2Bean = BeanUtils.map2Bean(messageMap, ClickViewEventMessage.class, true);
+			String eventKey = map2Bean.getEventKey();
+			String content = "您点击的按钮的key为: " + eventKey;
+			return MessageUtils.initTextMessage(map2Bean.getToUserName(), map2Bean.getFromUserName(), content);
+		}
+
+		// VIEW菜单的事件
+		if (MESSAGE_EVENT_VIEW.equals(event)) {
+			ClickViewEventMessage map2Bean = BeanUtils.map2Bean(messageMap, ClickViewEventMessage.class, true);
+			String eventKey = map2Bean.getEventKey();
+			String content = "您点击的按钮跳转的URL为: " + eventKey;
+			return MessageUtils.initTextMessage(map2Bean.getToUserName(), map2Bean.getFromUserName(), content);
+		}
+
+		// LOCATION菜单的事件
+		if (MESSAGE_EVENT_LOCATION.equals(event)) {
+			LocationEventMessage map2Bean = BeanUtils.map2Bean(messageMap, LocationEventMessage.class, true);
+			String latitude = map2Bean.getLatitude();
+			String longitude = map2Bean.getLongitude();
+			String precision = map2Bean.getPrecision();
+			String content = "您的经度：" + latitude + "， 您的维度：" + longitude + "， 您的精度： " + precision;
+			return MessageUtils.initTextMessage(map2Bean.getToUserName(), map2Bean.getFromUserName(), content);
+		}
+
+		return null;
 	}
 
 	private static AbstractResponseMessage handleLocationMessage(Map<String, Object> messageMap) {
