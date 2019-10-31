@@ -24,6 +24,7 @@ import cn.qlq.bean.weixin.response.NewsResponseMessageArticle;
 import cn.qlq.bean.weixin.response.NewsResponseMessageArticleItem;
 import cn.qlq.bean.weixin.response.TextResponseMessage;
 import cn.qlq.utils.BeanUtils;
+import cn.qlq.utils.baidutranslate.TransApi;
 
 public class MessageHandler {
 
@@ -253,6 +254,13 @@ public class MessageHandler {
 		responseMessage.setFromUserName(textMessage.getToUserName());
 		responseMessage.setToUserName(textMessage.getFromUserName());
 		responseMessage.setMsgType(MESSAGE_TEXT);
+
+		// 如果文字消息以翻译开头调用百度API翻译
+		if (StringUtils.startsWith(content, "翻译")) {
+			String translateResult = TransApi.translate(content.replaceAll("^翻译", ""));
+			translateResult = StringUtils.defaultIfBlank(translateResult, "未正确翻译");
+			responseMessage.setContent(translateResult);
+		}
 
 		return responseMessage;
 	}
