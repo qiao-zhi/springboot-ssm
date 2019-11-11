@@ -86,6 +86,7 @@ public class ChatServer {
 				synchronized (client) {
 					// 发送消息
 					client.session.getBasicRemote().sendText(msg);
+					System.out.println(msg);
 				}
 			} catch (IOException e) {
 				System.out.println("聊天错误，向客户端 " + client + " 发送消息出现错误。");
