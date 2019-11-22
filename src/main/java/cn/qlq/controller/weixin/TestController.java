@@ -35,14 +35,9 @@ public class TestController {
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println(request);
-		// response.setHeader("Keep-Alive", "timeout=5, max=94");
-
 		String method = request.getMethod();
-
-		System.out.println("request.getMethod(): " + method);
-
 		System.out.println("========================");
+		System.out.println("request.getMethod(): " + method);
 
 		Enumeration<String> parameterNames = request.getParameterNames();
 		while (parameterNames.hasMoreElements()) {

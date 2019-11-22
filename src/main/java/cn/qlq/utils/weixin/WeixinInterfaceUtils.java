@@ -100,7 +100,7 @@ public class WeixinInterfaceUtils {
 			param.put("appid", WeixinConstants.APPID);
 			param.put("secret", WeixinConstants.APP_SECRET);
 
-			String responseStr = HttpUtils.doGetWithParams(ACCESS_TOKEN_URL, param);
+			String responseStr = HttpUtils.doGet(ACCESS_TOKEN_URL);
 			if (StringUtils.isNotBlank(responseStr)) {
 				JSONObject parseObject = JSONObject.parseObject(responseStr);
 				if (parseObject != null && parseObject.containsKey("access_token")) {
@@ -143,7 +143,7 @@ public class WeixinInterfaceUtils {
 	public static JSONObject uploadTemporaryMaterial(String filePath, String type) {
 		String replacedUrl = URL_UPLOAD__TEMPEORARY_MATERIAL.replace("ACCESS_TOKEN", getAccessToken()).replace("TYPE",
 				type);
-		String uploadFileResult = HttpUtils.uploadFile(replacedUrl, filePath, "media");
+		String uploadFileResult = HttpUtils.doPostWithFile(replacedUrl, "media", filePath, null);
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}
@@ -163,7 +163,7 @@ public class WeixinInterfaceUtils {
 	public static JSONObject uploadPermanentMaterial(String filePath, String type) {
 		String replacedUrl = URL_UPLOAD__PERMANENT_MATERIAL.replace("ACCESS_TOKEN", getAccessToken()).replace("TYPE",
 				type);
-		String uploadFileResult = HttpUtils.uploadFile(replacedUrl, filePath, "media");
+		String uploadFileResult = HttpUtils.doPostWithFile(replacedUrl, "media", filePath, null);
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}
@@ -285,7 +285,7 @@ public class WeixinInterfaceUtils {
 	 */
 	public static JSONObject userInfo(String openId) {
 		String replacedUrl = URL_GET__USER_INFO.replace("ACCESS_TOKEN", getAccessToken()).replace("OPENID", openId);
-		String uploadFileResult = HttpUtils.doGet(replacedUrl, null);
+		String uploadFileResult = HttpUtils.doGet(replacedUrl);
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}
@@ -348,7 +348,7 @@ public class WeixinInterfaceUtils {
 	 */
 	public static JSONObject getMenu() {
 		String replacedUrl = URL_GET_MENU.replace("ACCESS_TOKEN", getAccessToken());
-		String uploadFileResult = HttpUtils.doGet(replacedUrl, null);
+		String uploadFileResult = HttpUtils.doGet(replacedUrl);
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}
@@ -363,7 +363,7 @@ public class WeixinInterfaceUtils {
 	 */
 	public static JSONObject deleteMenu() {
 		String replacedUrl = URL_DELETE_MENU.replace("ACCESS_TOKEN", getAccessToken());
-		String uploadFileResult = HttpUtils.doGet(replacedUrl, null);
+		String uploadFileResult = HttpUtils.doGet(replacedUrl);
 		if (StringUtils.isNotBlank(uploadFileResult)) {
 			return JSONObject.parseObject(uploadFileResult);
 		}

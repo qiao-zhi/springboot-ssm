@@ -47,8 +47,9 @@ public class WeixinAuthController {
 	}
 
 	/**
-	 * (二)用户同意授权; (三)微信会自动重定向到该页面并携带参数code和state用于换取access_token和openid;
-	 * (四) 用access_token和openid获取用户信息(五)如果有必要可以进行登录，两种:第一种是直接拿微信号登录；第二种是根据openid和nickname获取账号进行登录
+	 * (二)用户同意授权; (三)微信会自动重定向到该页面并携带参数code和state用于换取access_token和openid; (四)
+	 * 用access_token和openid获取用户信息(五)如果有必要可以进行登录，两种:第一种是直接拿微信号登录；
+	 * 第二种是根据openid和nickname获取账号进行登录
 	 * 
 	 * @param code
 	 * @param state
@@ -62,8 +63,8 @@ public class WeixinAuthController {
 		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code";
 		url = url.replace("APPID", WeixinConstants.APPID).replace("SECRET", WeixinConstants.APP_SECRET).replace("CODE",
 				code);
-		String doGet = HttpUtils.doGet(url, null);
-		
+		String doGet = HttpUtils.doGet(url);
+
 		if (StringUtils.isNotBlank(doGet)) {
 			JSONObject parseObject = JSONObject.parseObject(doGet);
 			System.out.println(parseObject);
@@ -73,11 +74,11 @@ public class WeixinAuthController {
 			String openid = parseObject.getString("openid");
 			String getUserInfoURL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 			getUserInfoURL = getUserInfoURL.replace("ACCESS_TOKEN", accessToken).replace("OPENID", openid);
-			String doGet2 = HttpUtils.doGet(getUserInfoURL, null);
+			String doGet2 = HttpUtils.doGet(getUserInfoURL);
 
 			// 可以用获取到的用户信息进行两种方式的登录
 			System.out.println(doGet2);
-			
+
 			return doGet2;
 		}
 

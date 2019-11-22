@@ -1,5 +1,6 @@
 package cn.qlq.controller.system;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -37,12 +38,16 @@ public class LoginController {
 	 */
 	@RequestMapping("doLogin")
 	@ResponseBody
-	public JSONResultUtil doLogin(String username, String password, HttpSession session) {
+	public JSONResultUtil doLogin(String username, String password, HttpServletResponse response, HttpSession session) {
 		if (!username.equals("admin") || !password.equals("admin")) {
 			return JSONResultUtil.error("账号或者密码错误");
 		}
 
 		session.setAttribute("user", new User());
+		System.out.println("登录成功");
+
+		response.setHeader("Access-Control-Allow-Origin", "*"); // 设置允许所有跨域访问
+
 		return JSONResultUtil.ok();
 	}
 }
