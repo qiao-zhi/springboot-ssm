@@ -1,13 +1,21 @@
 package cn.qlq.controller.system;
 
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.qlq.bean.user.User;
+import cn.qlq.service.user.UserService;
 import cn.qlq.utils.JSONResultUtil;
 
 /**
@@ -18,6 +26,12 @@ import cn.qlq.utils.JSONResultUtil;
  */
 @Controller
 public class LoginController {
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+	@Autowired
+	private UserService userService;
+
 	/**
 	 * 跳转到登陆界面
 	 * 
@@ -44,10 +58,34 @@ public class LoginController {
 		}
 
 		session.setAttribute("user", new User());
-		System.out.println("登录成功");
-
-		response.setHeader("Access-Control-Allow-Origin", "*"); // 设置允许所有跨域访问
-
 		return JSONResultUtil.ok();
+	}
+
+	/**
+	 * 处理登陆请求(JSON数据)
+	 * 
+	 * @param username
+	 * @param password
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("doLoginJSON")
+	@ResponseBody
+	public JSONResultUtil doLoginJSON(@RequestBody User user, HttpSession session, HttpServletRequest request) {
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String header = (String) headerNames.nextElement();
+			String value = request.getHeader(header);
+			System.out.println(header + "\t" + value);
+		}
+
+		User loginUser = userService.getUserByUserNameAndPassword(user.getUsername(), user.getPassword());
+		logger.debug("loginUser: {}", loginUser);
+		if (loginUser == null) {
+			return JSONResultUtil.error("账号或者密码错误");
+		}
+
+		session.setAttribute("user", loginUser);
+		return new JSONResultUtil<User>(true, "ok", loginUser);
 	}
 }

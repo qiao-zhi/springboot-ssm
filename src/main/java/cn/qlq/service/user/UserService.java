@@ -1,26 +1,25 @@
 package cn.qlq.service.user;
 
-
 import java.util.List;
 import java.util.Map;
 
 import cn.qlq.bean.user.User;
 
-
 public interface UserService {
-	
-	/**
-	 * 根据接口查询所用的用户
-	 */
-	public List<User> findAllUser();
 
-	public void addUser(User user);
+	List<User> findAllUser();
 
-	public List<User> getUsers(Map condition);
+	void addUser(User user);
 
-	public void deleteUser(int id);
+	List<User> getUsers(Map condition);
 
-	public User getUser(int id);
+	void deleteUser(int id);
 
-	public void updateUser(User user);
+	User getUser(int id);
+
+	void updateUser(User user);
+
+	User findUserByUsername(String username);
+
+	User getUserByUserNameAndPassword(String username, String password);
 }

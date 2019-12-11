@@ -38,7 +38,7 @@ public class MobileLoginController {
 	 */
 	@RequestMapping("doLogin")
 	@ResponseBody
-	public JSONResultUtil<Token> doLogin(String username, String password, HttpSession session) {
+	public JSONResultUtil doLogin(String username, String password, HttpSession session) {
 		if (!username.equals("admin") || !password.equals("admin")) {
 			return JSONResultUtil.error("账号或者密码错误");
 		}
@@ -47,6 +47,6 @@ public class MobileLoginController {
 
 		Token token = tokenService.addOrUpdateToken(username);
 		logger.info("token -> {}", token);
-		return new JSONResultUtil<Token>(true, token, "ok");
+		return new JSONResultUtil<Token>(true, "ok", token);
 	}
 }

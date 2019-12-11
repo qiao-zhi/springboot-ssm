@@ -19,6 +19,10 @@ public class User {
 
 	private String address;
 
+	private String roles;
+
+	private String userblank;
+
 	public Integer getId() {
 		return id;
 	}
@@ -81,6 +85,22 @@ public class User {
 
 	public void setAddress(String address) {
 		this.address = address == null ? null : address.trim();
+	}
+
+	public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+	public String getUserblank() {
+		return userblank;
+	}
+
+	public void setUserblank(String userblank) {
+		this.userblank = userblank;
 	}
 
 	@Override

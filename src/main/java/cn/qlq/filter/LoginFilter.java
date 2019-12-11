@@ -42,7 +42,7 @@ public class LoginFilter implements Filter {
 
 		// 如果包含login或者访问静态资源就放行
 		if (StringUtils.containsIgnoreCase(path, "login") || path.contains("/static/") || path.contains("/mobile/")
-				|| path.contains("/weixin/") || path.contains("/chat")) {
+				|| path.contains("/weixin/") || path.contains("/chat") || path.contains("/user/")) {
 
 			chain.doFilter(request, response); // 放行
 			return;

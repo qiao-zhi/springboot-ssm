@@ -32,6 +32,6 @@ public class MobileTokenController {
 		if (token == null) {
 			return JSONResultUtil.error("invalidToken");
 		}
-		return new JSONResultUtil<Object>(true, token, "");
+		return new JSONResultUtil<Object>(true, "", token);
 	}
 }

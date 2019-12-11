@@ -5,13 +5,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,6 +28,7 @@ import cn.qlq.service.user.UserService;
 import cn.qlq.utils.DefaultValue;
 import cn.qlq.utils.JSONResultUtil;
 import cn.qlq.utils.ValidateCheck;
+import cn.qlq.utils.securty.MD5Utils;
 
 @Controller /** 自动返回的是json格式数据 ***/
 @RequestMapping("user")
@@ -52,13 +56,42 @@ public class UserController {
 	}
 
 	/**
+	 * JSON形式的数据
+	 * 
+	 * @param user
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("addUserJSON")
+	@ResponseBody
+	public JSONResultUtil doAddUserJSON(@RequestBody User user, HttpServletRequest request) {
+		if (user != null && "admin".equals(user.getUsername())) {
+			return JSONResultUtil.error("您不能添加管理员用户");
+		}
+
+		User findUser = userService.findUserByUsername(user.getUsername());
+		if (findUser != null) {
+			return JSONResultUtil.error("用户已经存在");
+		}
+
+		user.setPassword(MD5Utils.md5(user.getPassword()));// md5加密密码
+		if (StringUtils.isBlank(user.getRoles())) {
+			user.setRoles("普通用户");
+		}
+
+		userService.addUser(user);
+		return JSONResultUtil.ok();
+	}
+
+	/**
 	 * 分页查询user
 	 * 
 	 * @param condition
 	 * @return
 	 */
 	@RequestMapping("getUsers")
-//	@Cacheable(value = "usersCache", keyGenerator = "keyGenerator") // 在redis中开启key为findAllUser开头的存储空间。key和keyGenerator只能使用一个
+	// @Cacheable(value = "usersCache", keyGenerator = "keyGenerator") //
+	// 在redis中开启key为findAllUser开头的存储空间。key和keyGenerator只能使用一个
 	@MyLogAnnotation(operateDescription = "分页查询用户")
 	@ResponseBody
 	public PageInfo<User> getUsers(@RequestParam Map condition) {

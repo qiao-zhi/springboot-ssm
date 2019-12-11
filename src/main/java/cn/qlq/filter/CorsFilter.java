@@ -8,28 +8,45 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 允许跨域请求
  */
-@WebFilter(filterName = "corsFilter", urlPatterns = "/*")
+// @WebFilter(filterName = "corsFilter", urlPatterns = "/*")
 public class CorsFilter implements Filter {
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
 
-		HttpServletResponse response2 = (HttpServletResponse) response;
-		response2.setHeader("Access-Control-Allow-Origin", "*"); // 解决跨域访问报错
-		response2.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-		response2.setHeader("Access-Control-Max-Age", "3600"); // 设置过期时间
-		response2.setHeader("Access-Control-Allow-Headers",
-				"Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization");
-		response2.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // 支持HTTP
-																						// 1.1.
-		response2.setHeader("Pragma", "no-cache"); // 支持HTTP 1.0.
-													// response.setHeader("Expires",
-													// "0");
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
+
+		// 允许访问的源
+		String headerOrigin = request.getHeader("Origin");
+		if (StringUtils.isNotBlank(headerOrigin)) {
+			response.setHeader("Access-Control-Allow-Origin", headerOrigin);
+		}
+
+		// 允许访问的方法
+		response.setHeader("Access-Control-Allow-Methods", "*");
+
+		// 正确的响应预检请求
+		// response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+		// 允许自定义的请求头(根据自定义请求头)
+		String headers = request.getHeader("Access-Control-Request-Headers");
+		if (StringUtils.isNotBlank(headers)) {
+			response.addHeader("Access-Control-Allow-Headers", headers);
+		}
+
+		// 允许预检命令缓存的时间
+		response.setHeader("Access-Control-Max-Age", "3600");
+
+		// 允许cookie
+		response.setHeader("Access-Control-Allow-Credentials", "true");
 
 		chain.doFilter(request, response);
 	}

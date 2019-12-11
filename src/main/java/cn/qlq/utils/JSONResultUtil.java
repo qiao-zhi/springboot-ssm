@@ -7,7 +7,9 @@ public class JSONResultUtil<T> implements Serializable {
 	private static final long serialVersionUID = 3637122497350396679L;
 
 	private boolean success;
+
 	private T data;
+
 	private String msg;
 
 	public boolean isSuccess() {
@@ -35,20 +37,17 @@ public class JSONResultUtil<T> implements Serializable {
 	}
 
 	public JSONResultUtil(boolean success) {
-		this.success = success;
+		this(success, "");
 	}
 
 	public JSONResultUtil(boolean success, String msg) {
-		super();
-		this.success = success;
-		this.msg = msg;
+		this(success, msg, null);
 	}
 
-	public JSONResultUtil(boolean success, T data, String msg) {
-		super();
+	public JSONResultUtil(boolean success, String msg, T data) {
 		this.success = success;
-		this.data = data;
 		this.msg = msg;
+		this.data = data;
 	}
 
 	/**
@@ -56,8 +55,8 @@ public class JSONResultUtil<T> implements Serializable {
 	 * 
 	 * @return
 	 */
-	public static JSONResultUtil ok() {
-		return new JSONResultUtil(true);
+	public static JSONResultUtil<Object> ok() {
+		return new JSONResultUtil<Object>(true);
 	}
 
 	/**
@@ -66,7 +65,7 @@ public class JSONResultUtil<T> implements Serializable {
 	 * @param msg
 	 * @return
 	 */
-	public static JSONResultUtil error(String msg) {
-		return new JSONResultUtil(false, msg);
+	public static JSONResultUtil<Object> error(String msg) {
+		return new JSONResultUtil<Object>(false, msg);
 	}
 }
