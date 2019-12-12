@@ -72,13 +72,6 @@ public class LoginController {
 	@RequestMapping("doLoginJSON")
 	@ResponseBody
 	public JSONResultUtil doLoginJSON(@RequestBody User user, HttpSession session, HttpServletRequest request) {
-		Enumeration<String> headerNames = request.getHeaderNames();
-		while (headerNames.hasMoreElements()) {
-			String header = (String) headerNames.nextElement();
-			String value = request.getHeader(header);
-			System.out.println(header + "\t" + value);
-		}
-
 		User loginUser = userService.getUserByUserNameAndPassword(user.getUsername(), user.getPassword());
 		logger.debug("loginUser: {}", loginUser);
 		if (loginUser == null) {
