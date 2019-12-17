@@ -95,12 +95,12 @@ public class WeixinInterfaceUtils {
 			accessToken = null;
 			lastGetAccessTokenTime = null;
 
-			Map<String, Object> param = new HashMap<>();
+			Map<String, String> param = new HashMap<>();
 			param.put("grant_type", "client_credential");
 			param.put("appid", WeixinConstants.APPID);
 			param.put("secret", WeixinConstants.APP_SECRET);
 
-			String responseStr = HttpUtils.doGet(ACCESS_TOKEN_URL);
+			String responseStr = HttpUtils.doGetWithParams(ACCESS_TOKEN_URL, param);
 			if (StringUtils.isNotBlank(responseStr)) {
 				JSONObject parseObject = JSONObject.parseObject(responseStr);
 				if (parseObject != null && parseObject.containsKey("access_token")) {
@@ -386,7 +386,7 @@ public class WeixinInterfaceUtils {
 		ViewButton button21 = new ViewButton();
 		button21.setName("view菜单");
 		button21.setType("view");
-		button21.setUrl("http://b4a819d0.ngrok.io/index.html");
+		button21.setUrl("http://86a24ad1.ngrok.io");
 
 		ClickButton button31 = new ClickButton();
 		button31.setName("扫码事件");
@@ -408,7 +408,6 @@ public class WeixinInterfaceUtils {
 
 	public static void main(String[] args) {
 		createMenuTest();
-		getMenuMenuTest();
 	}
 
 	private static void deleteMenuTest() {
