@@ -2,7 +2,6 @@ package cn.qlq.controller.weixin;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,8 +20,6 @@ public class TestController {
 	 */
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
-		response.setHeader("connection", "close");
-		System.out.println(request);
 		return "test/index";
 	}
 
