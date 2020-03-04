@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+	  
+<head>
+	<meta charset="UTF-8"/>
+	<title>后台登录-X-admin2.0</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/font.css'}"/>
+	<link rel="stylesheet" th:href="${#httpServletRequest.getContextPath()+'/static/x-admin/css/xadmin.css'}"/>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/js/jquery.min.js'}"></script>
+    <script th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/lib/layui/layui.js'}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/js/xadmin.js'}"></script>
+    
+    
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/login.js'}"></script>
+
+</head>
+<body class="login-bg">
+	<span shiro:authenticated="false" >
+	      <span>欢迎您：<span th:text="${session.user.username}"></span></span>
+	</span>
+	<shiro:hasRole name="usermanager">
+		系统管理员
+	</shiro:hasRole>
+	
+	<shiro:hasPermission name="user:add">
+		有增加权限
+	</shiro:hasPermission>
+	
+	<shiro:hasPermission name="user:update">
+		有修改权限
+	</shiro:hasPermission>
+</body>
+</html>
