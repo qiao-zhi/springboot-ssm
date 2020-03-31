@@ -29,6 +29,7 @@ public class RedisController {
 
 	@RequestMapping("/set")
 	public JSONResultUtil test() {
+		strRedis.convertAndSend("XX", "XX");
 		strRedis.opsForValue().set("mycache", "我存入的第一个cache", 660, TimeUnit.SECONDS);
 		return JSONResultUtil.ok();
 	}

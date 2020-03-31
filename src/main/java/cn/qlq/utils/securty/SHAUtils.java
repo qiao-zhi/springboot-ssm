@@ -13,7 +13,7 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author Administrator
  *
  */
-public class SHA1Utils {
+public class SHAUtils {
 
 	/**
 	 * 
@@ -32,6 +32,25 @@ public class SHA1Utils {
 	public static byte[] sha1(String sourceCode) {
 		// length为20的字节数组
 		return DigestUtils.sha1(sourceCode);
+	}
+
+	/**
+	 * 
+	 * @param sourceCode
+	 * @return 40位的16进制字符串
+	 */
+	public static String sha256Hex(String sourceCode) {
+		return DigestUtils.sha256Hex(sourceCode);
+	}
+
+	/**
+	 * 
+	 * @param sourceCode
+	 * @return length为20的字节数组，如果转为字符串需要new String(Hex.encodeHex(return))
+	 */
+	public static byte[] sha256(String sourceCode) {
+		// length为20的字节数组
+		return DigestUtils.sha256(sourceCode);
 	}
 
 	public static void main(String[] args) {
