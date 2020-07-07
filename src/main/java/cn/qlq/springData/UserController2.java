@@ -2,7 +2,6 @@ package cn.qlq.springData;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -41,7 +40,7 @@ public class UserController2 {
 		// 批量删除
 		// userDao.deleteAll();
 
-		userDao.delete(1);
+		userDao.deleteById(1);
 		return "success";
 	}
 
@@ -68,13 +67,13 @@ public class UserController2 {
 		// 根据条件判断
 		// userDao.exists(Example<S>);
 
-		boolean exists = userDao.exists(5);
+		boolean exists = userDao.existsById(5);
 		return exists;
 	}
 
 	@RequestMapping("getUser")
 	public User2 getUser() {
-		User2 user = userDao.findOne(2);
+		User2 user = userDao.getOne(2);
 
 		return user;
 	}
@@ -118,10 +117,10 @@ public class UserController2 {
 		// 构造排序
 		List<Sort.Order> orders = new ArrayList<Sort.Order>();
 		orders.add(new Sort.Order(Sort.Direction.DESC, "id"));
-		Sort sort = new Sort(orders);
+		Sort sort = Sort.by(orders);
 
 		// 构造请求参数，页号从0开始。
-		PageRequest pageRequest = new PageRequest(0, 2, sort);
+		PageRequest pageRequest = PageRequest.of(0, 2, sort);
 
 		// 如果不带条件不传第一个参数即可
 		Page<User2> findAll = userDao.findAll(example, pageRequest);

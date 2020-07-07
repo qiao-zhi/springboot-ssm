@@ -2,10 +2,6 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- <settings> 开启二级缓存 <setting name="cacheEnabled" value="true" /> </settings> -->
-	<!-- 只需要定义个别名,这个应该有 -->
-
-
 	<!-- springboot集成pageHelper(Java配置未注入的时候可以用下面配置) -->
 	<plugins>
 		<plugin interceptor="com.github.pagehelper.PageInterceptor">

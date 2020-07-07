@@ -1,8 +1,10 @@
 package cn.qlq.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import cn.qlq.interceptor.MyInterceptor1;
 import cn.qlq.interceptor.MyInterceptor2;
@@ -14,7 +16,16 @@ import cn.qlq.interceptor.MyInterceptor2;
  *
  */
 @Configuration
-public class InterceptorConfig extends WebMvcConfigurerAdapter {
+public class InterceptorConfig implements WebMvcConfigurer {
+
+	/**
+	 * 设置页面的默认页面
+	 */
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/").setViewName("forward:/index.html");
+		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -23,7 +34,5 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 		 */
 		registry.addInterceptor(new MyInterceptor1()).addPathPatterns("/th/**").addPathPatterns("/freemarker/**");
 		registry.addInterceptor(new MyInterceptor2()).addPathPatterns("/freemarker/**");
-
-		super.addInterceptors(registry);
 	}
 }

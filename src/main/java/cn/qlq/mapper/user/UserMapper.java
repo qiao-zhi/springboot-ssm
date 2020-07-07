@@ -1,14 +1,16 @@
 package cn.qlq.mapper.user;
 
-import cn.qlq.bean.user.User;
-import cn.qlq.bean.user.UserExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import cn.qlq.bean.user.User;
+import cn.qlq.bean.user.UserExample;
+
 @Mapper
 public interface UserMapper {
+
 	int countByExample(UserExample example);
 
 	int deleteByExample(UserExample example);

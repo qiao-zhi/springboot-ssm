@@ -12,8 +12,8 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.springframework.stereotype.Component;
 
-@ServerEndpoint("/chat")
-@Component
+//@ServerEndpoint("/chat")
+//@Component
 public class ChatServer {
 
 	private boolean first = true;

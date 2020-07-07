@@ -3,13 +3,24 @@
 <mapper namespace="cn.qlq.mapper.user.UserMapper" >
   <resultMap id="BaseResultMap" type="cn.qlq.bean.user.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="userfullname" property="userfullname" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="DATE" />
-    <result column="isdeleted" property="isdeleted" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="isdeleted" property="isdeleted" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="userfullname" property="userfullname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="properties" property="properties" jdbcType="VARCHAR" />
+    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+    <result column="remark3" property="remark3" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="roles" property="roles" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="userblank" property="userblank" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +81,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, username, password, userfullname, createtime, isdeleted, sex, address
+    id, address, createtime, isdeleted, password, sex, userfullname, username, creator, 
+    properties, remark1, remark2, remark3, email, fullname, phone, roles, updatetime, 
+    userblank
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qlq.bean.user.UserExample" >
     select
@@ -103,12 +116,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.qlq.bean.user.User" >
-    insert into user (id, username, password, 
-      userfullname, createtime, isdeleted, 
-      sex, address)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{userfullname,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{isdeleted,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+    insert into user (id, address, createtime, 
+      isdeleted, password, sex, 
+      userfullname, username, creator, 
+      properties, remark1, remark2, 
+      remark3, email, fullname, 
+      phone, roles, updatetime, 
+      userblank)
+    values (#{id,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{isdeleted,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{userfullname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{properties,jdbcType=VARCHAR}, #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, 
+      #{remark3,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{userblank,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.qlq.bean.user.User" >
     insert into user
@@ -116,14 +137,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="username != null" >
-        username,
-      </if>
-      <if test="password != null" >
-        password,
-      </if>
-      <if test="userfullname != null" >
-        userfullname,
+      <if test="address != null" >
+        address,
       </if>
       <if test="createtime != null" >
         createtime,
@@ -131,37 +146,109 @@
       <if test="isdeleted != null" >
         isdeleted,
       </if>
+      <if test="password != null" >
+        password,
+      </if>
       <if test="sex != null" >
         sex,
       </if>
-      <if test="address != null" >
-        address,
+      <if test="userfullname != null" >
+        userfullname,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="properties != null" >
+        properties,
+      </if>
+      <if test="remark1 != null" >
+        remark1,
+      </if>
+      <if test="remark2 != null" >
+        remark2,
+      </if>
+      <if test="remark3 != null" >
+        remark3,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="fullname != null" >
+        fullname,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="roles != null" >
+        roles,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="userblank != null" >
+        userblank,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="userfullname != null" >
-        #{userfullname,jdbcType=VARCHAR},
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
-        #{createtime,jdbcType=DATE},
+        #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="isdeleted != null" >
         #{isdeleted,jdbcType=VARCHAR},
       </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
       <if test="sex != null" >
         #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
+      <if test="userfullname != null" >
+        #{userfullname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="properties != null" >
+        #{properties,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null" >
+        #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userblank != null" >
+        #{userblank,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -177,26 +264,59 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null" >
-        password = #{record.password,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userfullname != null" >
-        userfullname = #{record.userfullname,jdbcType=VARCHAR},
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null" >
-        createtime = #{record.createtime,jdbcType=DATE},
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.isdeleted != null" >
         isdeleted = #{record.isdeleted,jdbcType=VARCHAR},
       </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
       <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=VARCHAR},
       </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
+      <if test="record.userfullname != null" >
+        userfullname = #{record.userfullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.properties != null" >
+        properties = #{record.properties,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark1 != null" >
+        remark1 = #{record.remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark2 != null" >
+        remark2 = #{record.remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark3 != null" >
+        remark3 = #{record.remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fullname != null" >
+        fullname = #{record.fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roles != null" >
+        roles = #{record.roles,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userblank != null" >
+        userblank = #{record.userblank,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -206,13 +326,24 @@
   <update id="updateByExample" parameterType="map" >
     update user
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      userfullname = #{record.userfullname,jdbcType=VARCHAR},
-      createtime = #{record.createtime,jdbcType=DATE},
+      address = #{record.address,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
       isdeleted = #{record.isdeleted,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR}
+      userfullname = #{record.userfullname,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      properties = #{record.properties,jdbcType=VARCHAR},
+      remark1 = #{record.remark1,jdbcType=VARCHAR},
+      remark2 = #{record.remark2,jdbcType=VARCHAR},
+      remark3 = #{record.remark3,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      fullname = #{record.fullname,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      roles = #{record.roles,jdbcType=VARCHAR},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      userblank = #{record.userblank,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,39 +351,83 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.qlq.bean.user.User" >
     update user
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="userfullname != null" >
-        userfullname = #{userfullname,jdbcType=VARCHAR},
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=DATE},
+        createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="isdeleted != null" >
         isdeleted = #{isdeleted,jdbcType=VARCHAR},
       </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
       <if test="sex != null" >
         sex = #{sex,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
+      <if test="userfullname != null" >
+        userfullname = #{userfullname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="properties != null" >
+        properties = #{properties,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null" >
+        remark1 = #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null" >
+        remark2 = #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null" >
+        remark3 = #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null" >
+        roles = #{roles,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userblank != null" >
+        userblank = #{userblank,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.qlq.bean.user.User" >
     update user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      userfullname = #{userfullname,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=DATE},
+    set address = #{address,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
       isdeleted = #{isdeleted,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR}
+      userfullname = #{userfullname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      properties = #{properties,jdbcType=VARCHAR},
+      remark1 = #{remark1,jdbcType=VARCHAR},
+      remark2 = #{remark2,jdbcType=VARCHAR},
+      remark3 = #{remark3,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      roles = #{roles,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      userblank = #{userblank,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
