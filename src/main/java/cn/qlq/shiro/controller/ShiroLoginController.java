@@ -15,8 +15,8 @@ import cn.qlq.shiro.bean.ShiroUser;
 import cn.qlq.shiro.mapper.ShiroUserMapper;
 import cn.qlq.utils.JSONResultUtil;
 
-@Controller
-@RequestMapping("shiro")
+//@Controller
+//@RequestMapping("shiro")
 public class ShiroLoginController {
 
 	@Autowired

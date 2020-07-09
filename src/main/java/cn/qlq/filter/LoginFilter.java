@@ -25,7 +25,7 @@ import cn.qlq.bean.user.User;
  * @author Administrator
  *
  */
-@WebFilter(filterName = "loginFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "loginFilter", urlPatterns = "/*")
 public class LoginFilter implements Filter {
 	private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
