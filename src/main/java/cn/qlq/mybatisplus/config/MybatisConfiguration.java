@@ -16,7 +16,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import com.github.pagehelper.PageInterceptor;
 
 @Configuration
-@MapperScan({ "cn.qlq" })
+@MapperScan({ "cn.qlq.mapper", "cn.qlq.sharedjdbc.client" })
 public class MybatisConfiguration {
 
 	private static final Logger log = LoggerFactory.getLogger(MybatisConfiguration.class);

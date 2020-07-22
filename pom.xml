@@ -203,6 +203,13 @@
 			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
 			<version>4.0.0</version>
 		</dependency>
+
+		<!-- spring-boot整合druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.22</version>
+		</dependency>
 	</dependencies>
 
 	<distributionManagement>
