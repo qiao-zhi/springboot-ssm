@@ -5,22 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseUtils {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:13307/";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/";
 
 	// Database credentials
 	static final String USER = "root";
-	static final String PASS = "!32aDs$5%N";
+	static final String PASS = "123456";
 
 	public synchronized static void addTargetDataSources(String database) {
 		if (!DynamicDataSourceContextHolder.dataSourceKeys.contains(database)) {
 			DynamicDataSource dynamicDataSource = DynamicDataSource.getInstance();
-			DruidDataSource druidDataSource = new DruidDataSource();
-			druidDataSource.setUrl(DB_URL + database
+			HikariDataSource druidDataSource = new HikariDataSource();
+			druidDataSource.setUsername(DB_URL + database
 					+ "?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;failOverReadOnly=false");
 			druidDataSource.setUsername(USER);
 			druidDataSource.setPassword(PASS);
