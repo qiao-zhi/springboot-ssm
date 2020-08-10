@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.Map;
 import java.util.Set;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseUtils {
 
@@ -23,8 +23,8 @@ public class DatabaseUtils {
 		Map<Object, Object> dynamicTargetDataSources = DynamicDataSource.dynamicTargetDataSources;
 		Set<Object> keySet = dynamicTargetDataSources.keySet();
 		if (!keySet.contains(database)) {
-			DruidDataSource druidDataSource = new DruidDataSource();
-			druidDataSource.setUrl(DB_URL + database
+			HikariDataSource druidDataSource = new HikariDataSource();
+			druidDataSource.setUsername(DB_URL + database
 					+ "?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;failOverReadOnly=false");
 			druidDataSource.setUsername(USER);
 			druidDataSource.setPassword(PASS);
