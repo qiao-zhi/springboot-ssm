@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.12.0.xsd">
+    <!-- Configure the database connection here -->
+    <jdbc>
+        <driver>com.mysql.jdbc.Driver</driver>
+        <url>jdbc:mysql://localhost:3306/test1?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;failOverReadOnly=false</url>
+        <user>root</user>
+        <password>123456</password>
+    </jdbc>
+
+    <generator>
+        <!-- The default code generator. You can override this one, to generate your own code style.
+             Supported generators:
+             - org.jooq.codegen.JavaGenerator
+             - org.jooq.codegen.ScalaGenerator
+             Defaults to org.jooq.codegen.JavaGenerator -->
+        <name>org.jooq.codegen.JavaGenerator</name>
+
+        <database>
+            <!-- The database type. The format here is:
+                 org.jooq.meta.[database].[database]Database -->
+            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+
+            <!-- The database schema (or in the absence of schema support, in your RDBMS this
+                 can be the owner, user, database name) to be generated -->
+            <!-- 数据库名 -->
+            <inputSchema>test1</inputSchema>
+
+            <!-- All elements that are generated from your schema
+                 (A Java regular expression. Use the pipe to separate several expressions)
+                 Watch out for case-sensitivity. Depending on your database, this might be important! -->
+            <!-- 包含哪些表 -->
+            <includes>.*</includes>
+
+            <!-- All elements that are excluded from your schema
+                 (A Java regular expression. Use the pipe to separate several expressions).
+                 Excludes match before includes, i.e. excludes have a higher priority -->
+            <!-- 排除哪些表，这里支持正则表达式 ，多个条件可以用 | 连接符连接-->
+            <!-- 例如：TEST | OTHERS 生成代码时就不会把叫做TEST和OTHERS的表包括进去了-->
+            <excludes></excludes>
+        </database>
+
+        <!-- Optional: The programmatic or configurative generator strategy. -->
+        <strategy>
+            <matchers>
+                <tables>
+                    <table>
+                        <tableClass>
+                            <transform>UPPER</transform>
+                        </tableClass>
+                        <pojoClass>
+                            <!-- <expression>*+Model</expression> -->
+                        </pojoClass>
+                    </table>
+                </tables>
+            </matchers>
+        </strategy>
+        <generate>
+            <pojos>true</pojos>
+            <daos>true</daos>
+            <interfaces>true</interfaces>
+            <jpaAnnotations>false</jpaAnnotations>
+            <springAnnotations>false</springAnnotations>
+        </generate>
+
+        <target>
+            <!-- The destination package of your generated classes (within the destination directory) -->
+            <!-- 生成的代码存放的包名 -->
+            <packageName>cn.qlq.jooq</packageName>
+
+            <!-- The destination directory of your generated classes. Using Maven directory layout here -->
+            <!-- 存放的路径 -->
+            <directory>src/main/java/</directory>
+        </target>
+    </generator>
+</configuration>
