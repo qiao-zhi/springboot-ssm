@@ -1,0 +1,1 @@
+alter table test ADD COLUMN `name` varchar(255) NULL AFTER `id`
