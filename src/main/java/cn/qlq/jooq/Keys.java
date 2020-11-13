@@ -5,6 +5,7 @@ package cn.qlq.jooq;
 
 
 import cn.qlq.jooq.tables.COUNTRY;
+import cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY;
 import cn.qlq.jooq.tables.MP_USER;
 import cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION;
 import cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE;
@@ -15,6 +16,7 @@ import cn.qlq.jooq.tables.USER;
 import cn.qlq.jooq.tables.USER2;
 import cn.qlq.jooq.tables.USER_COUNTRY;
 import cn.qlq.jooq.tables.records.CountryRecord;
+import cn.qlq.jooq.tables.records.FlywaySchemaHistoryRecord;
 import cn.qlq.jooq.tables.records.MpUserRecord;
 import cn.qlq.jooq.tables.records.SystemShiroPermissionRecord;
 import cn.qlq.jooq.tables.records.SystemShiroRolePermissionsRecord;
@@ -55,6 +57,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<CountryRecord> KEY_COUNTRY_PRIMARY = UniqueKeys0.KEY_COUNTRY_PRIMARY;
+    public static final UniqueKey<FlywaySchemaHistoryRecord> KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY = UniqueKeys0.KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY;
     public static final UniqueKey<MpUserRecord> KEY_MP_USER_PRIMARY = UniqueKeys0.KEY_MP_USER_PRIMARY;
     public static final UniqueKey<SystemShiroPermissionRecord> KEY_SYSTEM_SHIRO_PERMISSION_PRIMARY = UniqueKeys0.KEY_SYSTEM_SHIRO_PERMISSION_PRIMARY;
     public static final UniqueKey<SystemShiroRoleRecord> KEY_SYSTEM_SHIRO_ROLE_PRIMARY = UniqueKeys0.KEY_SYSTEM_SHIRO_ROLE_PRIMARY;
@@ -76,6 +79,7 @@ public class Keys {
 
     private static class UniqueKeys0 {
         public static final UniqueKey<CountryRecord> KEY_COUNTRY_PRIMARY = Internal.createUniqueKey(COUNTRY.COUNTRY, "KEY_country_PRIMARY", COUNTRY.COUNTRY.ID);
+        public static final UniqueKey<FlywaySchemaHistoryRecord> KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY = Internal.createUniqueKey(FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY, "KEY_flyway_schema_history_PRIMARY", FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK);
         public static final UniqueKey<MpUserRecord> KEY_MP_USER_PRIMARY = Internal.createUniqueKey(MP_USER.MP_USER, "KEY_mp_user_PRIMARY", MP_USER.MP_USER.ID);
         public static final UniqueKey<SystemShiroPermissionRecord> KEY_SYSTEM_SHIRO_PERMISSION_PRIMARY = Internal.createUniqueKey(SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION, "KEY_system_shiro_permission_PRIMARY", SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION.ID);
         public static final UniqueKey<SystemShiroRoleRecord> KEY_SYSTEM_SHIRO_ROLE_PRIMARY = Internal.createUniqueKey(SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE, "KEY_system_shiro_role_PRIMARY", SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE.ID);

@@ -5,6 +5,7 @@ package cn.qlq.jooq;
 
 
 import cn.qlq.jooq.tables.COUNTRY;
+import cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY;
 import cn.qlq.jooq.tables.HIBERNATE_SEQUENCE;
 import cn.qlq.jooq.tables.MP_USER;
 import cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION;
@@ -36,6 +37,11 @@ public class Tables {
      * The table <code>test1.country</code>.
      */
     public static final COUNTRY COUNTRY = cn.qlq.jooq.tables.COUNTRY.COUNTRY;
+
+    /**
+     * The table <code>test1.flyway_schema_history</code>.
+     */
+    public static final FLYWAY_SCHEMA_HISTORY FLYWAY_SCHEMA_HISTORY = cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY;
 
     /**
      * The table <code>test1.hibernate_sequence</code>.

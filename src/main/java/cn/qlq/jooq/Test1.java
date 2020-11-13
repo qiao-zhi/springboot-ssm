@@ -5,6 +5,7 @@ package cn.qlq.jooq;
 
 
 import cn.qlq.jooq.tables.COUNTRY;
+import cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY;
 import cn.qlq.jooq.tables.HIBERNATE_SEQUENCE;
 import cn.qlq.jooq.tables.MP_USER;
 import cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION;
@@ -40,7 +41,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Test1 extends SchemaImpl {
 
-    private static final long serialVersionUID = 1470874579;
+    private static final long serialVersionUID = 1609831985;
 
     /**
      * The reference instance of <code>test1</code>
@@ -51,6 +52,11 @@ public class Test1 extends SchemaImpl {
      * The table <code>test1.country</code>.
      */
     public final COUNTRY COUNTRY = cn.qlq.jooq.tables.COUNTRY.COUNTRY;
+
+    /**
+     * The table <code>test1.flyway_schema_history</code>.
+     */
+    public final FLYWAY_SCHEMA_HISTORY FLYWAY_SCHEMA_HISTORY = cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY;
 
     /**
      * The table <code>test1.hibernate_sequence</code>.
@@ -125,6 +131,7 @@ public class Test1 extends SchemaImpl {
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
             COUNTRY.COUNTRY,
+            FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY,
             HIBERNATE_SEQUENCE.HIBERNATE_SEQUENCE,
             MP_USER.MP_USER,
             SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION,

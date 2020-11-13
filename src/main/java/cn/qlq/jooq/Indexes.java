@@ -5,6 +5,7 @@ package cn.qlq.jooq;
 
 
 import cn.qlq.jooq.tables.COUNTRY;
+import cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY;
 import cn.qlq.jooq.tables.MP_USER;
 import cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION;
 import cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE;
@@ -40,6 +41,8 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     public static final Index COUNTRY_PRIMARY = Indexes0.COUNTRY_PRIMARY;
+    public static final Index FLYWAY_SCHEMA_HISTORY_FLYWAY_SCHEMA_HISTORY_S_IDX = Indexes0.FLYWAY_SCHEMA_HISTORY_FLYWAY_SCHEMA_HISTORY_S_IDX;
+    public static final Index FLYWAY_SCHEMA_HISTORY_PRIMARY = Indexes0.FLYWAY_SCHEMA_HISTORY_PRIMARY;
     public static final Index MP_USER_PRIMARY = Indexes0.MP_USER_PRIMARY;
     public static final Index SYSTEM_SHIRO_PERMISSION_PRIMARY = Indexes0.SYSTEM_SHIRO_PERMISSION_PRIMARY;
     public static final Index SYSTEM_SHIRO_ROLE_PRIMARY = Indexes0.SYSTEM_SHIRO_ROLE_PRIMARY;
@@ -59,6 +62,8 @@ public class Indexes {
 
     private static class Indexes0 {
         public static Index COUNTRY_PRIMARY = Internal.createIndex("PRIMARY", COUNTRY.COUNTRY, new OrderField[] { COUNTRY.COUNTRY.ID }, true);
+        public static Index FLYWAY_SCHEMA_HISTORY_FLYWAY_SCHEMA_HISTORY_S_IDX = Internal.createIndex("flyway_schema_history_s_idx", FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY, new OrderField[] { FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY.SUCCESS }, false);
+        public static Index FLYWAY_SCHEMA_HISTORY_PRIMARY = Internal.createIndex("PRIMARY", FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY, new OrderField[] { FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
         public static Index MP_USER_PRIMARY = Internal.createIndex("PRIMARY", MP_USER.MP_USER, new OrderField[] { MP_USER.MP_USER.ID }, true);
         public static Index SYSTEM_SHIRO_PERMISSION_PRIMARY = Internal.createIndex("PRIMARY", SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION, new OrderField[] { SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION.ID }, true);
         public static Index SYSTEM_SHIRO_ROLE_PRIMARY = Internal.createIndex("PRIMARY", SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE, new OrderField[] { SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE.ID }, true);
