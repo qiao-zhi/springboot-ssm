@@ -4,10 +4,9 @@
 package cn.qlq.jooq.tables.interfaces;
 
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-
 import javax.annotation.Generated;
+import java.io.Serializable;
+import java.sql.Date;
 
 
 /**
@@ -34,34 +33,14 @@ public interface IUser extends Serializable {
     public Integer getId();
 
     /**
-     * Setter for <code>test1.user.address</code>.
+     * Setter for <code>test1.user.username</code>.
      */
-    public void setAddress(String value);
+    public void setUsername(String value);
 
     /**
-     * Getter for <code>test1.user.address</code>.
+     * Getter for <code>test1.user.username</code>.
      */
-    public String getAddress();
-
-    /**
-     * Setter for <code>test1.user.createtime</code>.
-     */
-    public void setCreatetime(Timestamp value);
-
-    /**
-     * Getter for <code>test1.user.createtime</code>.
-     */
-    public Timestamp getCreatetime();
-
-    /**
-     * Setter for <code>test1.user.isdeleted</code>.
-     */
-    public void setIsdeleted(String value);
-
-    /**
-     * Getter for <code>test1.user.isdeleted</code>.
-     */
-    public String getIsdeleted();
+    public String getUsername();
 
     /**
      * Setter for <code>test1.user.password</code>.
@@ -74,14 +53,34 @@ public interface IUser extends Serializable {
     public String getPassword();
 
     /**
-     * Setter for <code>test1.user.roles</code>.
+     * Setter for <code>test1.user.userfullname</code>.
      */
-    public void setRoles(String value);
+    public void setUserfullname(String value);
 
     /**
-     * Getter for <code>test1.user.roles</code>.
+     * Getter for <code>test1.user.userfullname</code>.
      */
-    public String getRoles();
+    public String getUserfullname();
+
+    /**
+     * Setter for <code>test1.user.createtime</code>.
+     */
+    public void setCreatetime(Date value);
+
+    /**
+     * Getter for <code>test1.user.createtime</code>.
+     */
+    public Date getCreatetime();
+
+    /**
+     * Setter for <code>test1.user.isdeleted</code>.
+     */
+    public void setIsdeleted(String value);
+
+    /**
+     * Getter for <code>test1.user.isdeleted</code>.
+     */
+    public String getIsdeleted();
 
     /**
      * Setter for <code>test1.user.sex</code>.
@@ -94,6 +93,26 @@ public interface IUser extends Serializable {
     public String getSex();
 
     /**
+     * Setter for <code>test1.user.address</code>.
+     */
+    public void setAddress(String value);
+
+    /**
+     * Getter for <code>test1.user.address</code>.
+     */
+    public String getAddress();
+
+    /**
+     * Setter for <code>test1.user.roles</code>.
+     */
+    public void setRoles(String value);
+
+    /**
+     * Getter for <code>test1.user.roles</code>.
+     */
+    public String getRoles();
+
+    /**
      * Setter for <code>test1.user.userblank</code>.
      */
     public void setUserblank(String value);
@@ -102,26 +121,6 @@ public interface IUser extends Serializable {
      * Getter for <code>test1.user.userblank</code>.
      */
     public String getUserblank();
-
-    /**
-     * Setter for <code>test1.user.userfullname</code>.
-     */
-    public void setUserfullname(String value);
-
-    /**
-     * Getter for <code>test1.user.userfullname</code>.
-     */
-    public String getUserfullname();
-
-    /**
-     * Setter for <code>test1.user.username</code>.
-     */
-    public void setUsername(String value);
-
-    /**
-     * Getter for <code>test1.user.username</code>.
-     */
-    public String getUsername();
 
     // -------------------------------------------------------------------------
     // FROM and INTO

@@ -5,27 +5,16 @@ package cn.qlq.jooq;
 
 
 import cn.qlq.jooq.tables.COUNTRY;
-import cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY;
-import cn.qlq.jooq.tables.HIBERNATE_SEQUENCE;
-import cn.qlq.jooq.tables.MP_USER;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE_PERMISSIONS;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_USER;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_USER_ROLES;
 import cn.qlq.jooq.tables.USER;
-import cn.qlq.jooq.tables.USER2;
-import cn.qlq.jooq.tables.USER_COUNTRY;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
+import cn.qlq.jooq.tables.USERCOUNTRY;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
+
+import javax.annotation.Generated;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -41,7 +30,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Test1 extends SchemaImpl {
 
-    private static final long serialVersionUID = 1609831985;
+    private static final long serialVersionUID = 478874339;
 
     /**
      * The reference instance of <code>test1</code>
@@ -54,59 +43,14 @@ public class Test1 extends SchemaImpl {
     public final COUNTRY COUNTRY = cn.qlq.jooq.tables.COUNTRY.COUNTRY;
 
     /**
-     * The table <code>test1.flyway_schema_history</code>.
-     */
-    public final FLYWAY_SCHEMA_HISTORY FLYWAY_SCHEMA_HISTORY = cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY;
-
-    /**
-     * The table <code>test1.hibernate_sequence</code>.
-     */
-    public final HIBERNATE_SEQUENCE HIBERNATE_SEQUENCE = cn.qlq.jooq.tables.HIBERNATE_SEQUENCE.HIBERNATE_SEQUENCE;
-
-    /**
-     * The table <code>test1.mp_user</code>.
-     */
-    public final MP_USER MP_USER = cn.qlq.jooq.tables.MP_USER.MP_USER;
-
-    /**
-     * The table <code>test1.system_shiro_permission</code>.
-     */
-    public final SYSTEM_SHIRO_PERMISSION SYSTEM_SHIRO_PERMISSION = cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION;
-
-    /**
-     * The table <code>test1.system_shiro_role</code>.
-     */
-    public final SYSTEM_SHIRO_ROLE SYSTEM_SHIRO_ROLE = cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE;
-
-    /**
-     * The table <code>test1.system_shiro_role_permissions</code>.
-     */
-    public final SYSTEM_SHIRO_ROLE_PERMISSIONS SYSTEM_SHIRO_ROLE_PERMISSIONS = cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE_PERMISSIONS.SYSTEM_SHIRO_ROLE_PERMISSIONS;
-
-    /**
-     * The table <code>test1.system_shiro_user</code>.
-     */
-    public final SYSTEM_SHIRO_USER SYSTEM_SHIRO_USER = cn.qlq.jooq.tables.SYSTEM_SHIRO_USER.SYSTEM_SHIRO_USER;
-
-    /**
-     * The table <code>test1.system_shiro_user_roles</code>.
-     */
-    public final SYSTEM_SHIRO_USER_ROLES SYSTEM_SHIRO_USER_ROLES = cn.qlq.jooq.tables.SYSTEM_SHIRO_USER_ROLES.SYSTEM_SHIRO_USER_ROLES;
-
-    /**
      * The table <code>test1.user</code>.
      */
     public final USER USER = cn.qlq.jooq.tables.USER.USER;
 
     /**
-     * The table <code>test1.user2</code>.
+     * The table <code>test1.usercountry</code>.
      */
-    public final USER2 USER2 = cn.qlq.jooq.tables.USER2.USER2;
-
-    /**
-     * The table <code>test1.user_country</code>.
-     */
-    public final USER_COUNTRY USER_COUNTRY = cn.qlq.jooq.tables.USER_COUNTRY.USER_COUNTRY;
+    public final USERCOUNTRY USERCOUNTRY = cn.qlq.jooq.tables.USERCOUNTRY.USERCOUNTRY;
 
     /**
      * No further instances allowed
@@ -131,16 +75,7 @@ public class Test1 extends SchemaImpl {
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
             COUNTRY.COUNTRY,
-            FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY,
-            HIBERNATE_SEQUENCE.HIBERNATE_SEQUENCE,
-            MP_USER.MP_USER,
-            SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION,
-            SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE,
-            SYSTEM_SHIRO_ROLE_PERMISSIONS.SYSTEM_SHIRO_ROLE_PERMISSIONS,
-            SYSTEM_SHIRO_USER.SYSTEM_SHIRO_USER,
-            SYSTEM_SHIRO_USER_ROLES.SYSTEM_SHIRO_USER_ROLES,
             USER.USER,
-            USER2.USER2,
-            USER_COUNTRY.USER_COUNTRY);
+            USERCOUNTRY.USERCOUNTRY);
     }
 }

@@ -8,24 +8,13 @@ import cn.qlq.jooq.Indexes;
 import cn.qlq.jooq.Keys;
 import cn.qlq.jooq.Test1;
 import cn.qlq.jooq.tables.records.CountryRecord;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Row2;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+
+import javax.annotation.Generated;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -41,12 +30,12 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class COUNTRY extends TableImpl<CountryRecord> {
 
-    private static final long serialVersionUID = -1775673865;
+    private static final long serialVersionUID = -337812500;
 
     /**
      * The reference instance of <code>test1.country</code>
      */
-    public static final COUNTRY COUNTRY = new COUNTRY();
+    public static final cn.qlq.jooq.tables.COUNTRY COUNTRY = new COUNTRY();
 
     /**
      * The class holding records for this type
@@ -59,7 +48,7 @@ public class COUNTRY extends TableImpl<CountryRecord> {
     /**
      * The column <code>test1.country.id</code>.
      */
-    public final TableField<CountryRecord, Integer> ID = createField(DSL.name("id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CountryRecord, Integer> ID = createField(DSL.name("id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>test1.country.countryname</code>.
@@ -110,6 +99,11 @@ public class COUNTRY extends TableImpl<CountryRecord> {
     }
 
     @Override
+    public Identity<CountryRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_COUNTRY;
+    }
+
+    @Override
     public UniqueKey<CountryRecord> getPrimaryKey() {
         return Keys.KEY_COUNTRY_PRIMARY;
     }
@@ -120,12 +114,12 @@ public class COUNTRY extends TableImpl<CountryRecord> {
     }
 
     @Override
-    public COUNTRY as(String alias) {
+    public cn.qlq.jooq.tables.COUNTRY as(String alias) {
         return new COUNTRY(DSL.name(alias), this);
     }
 
     @Override
-    public COUNTRY as(Name alias) {
+    public cn.qlq.jooq.tables.COUNTRY as(Name alias) {
         return new COUNTRY(alias, this);
     }
 
@@ -133,7 +127,7 @@ public class COUNTRY extends TableImpl<CountryRecord> {
      * Rename this table
      */
     @Override
-    public COUNTRY rename(String name) {
+    public cn.qlq.jooq.tables.COUNTRY rename(String name) {
         return new COUNTRY(DSL.name(name), null);
     }
 
@@ -141,7 +135,7 @@ public class COUNTRY extends TableImpl<CountryRecord> {
      * Rename this table
      */
     @Override
-    public COUNTRY rename(Name name) {
+    public cn.qlq.jooq.tables.COUNTRY rename(Name name) {
         return new COUNTRY(name, null);
     }
 

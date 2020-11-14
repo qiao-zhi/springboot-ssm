@@ -3,13 +3,13 @@ package test;
 import cn.qlq.MySpringBootApplication;
 import cn.qlq.jooq.tables.COUNTRY;
 import cn.qlq.jooq.tables.USER;
-import cn.qlq.jooq.tables.USER_COUNTRY;
+import cn.qlq.jooq.tables.USERCOUNTRY;
 import cn.qlq.jooq.tables.daos.CountryDao;
-import cn.qlq.jooq.tables.daos.UserCountryDao;
 import cn.qlq.jooq.tables.daos.UserDao;
+import cn.qlq.jooq.tables.daos.UsercountryDao;
 import cn.qlq.jooq.tables.pojos.Country;
 import cn.qlq.jooq.tables.pojos.User;
-import cn.qlq.jooq.tables.pojos.UserCountry;
+import cn.qlq.jooq.tables.pojos.Usercountry;
 import cn.qlq.jooq.tables.records.UserRecord;
 import org.jooq.DSLContext;
 import org.jooq.Field;
@@ -18,6 +18,7 @@ import org.jooq.Result;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -34,13 +35,15 @@ import java.util.Map;
 public class Jooqtest {
 
     @Autowired
+    @Qualifier("userDao2")
     private UserDao userDao;
 
     @Autowired
+    @Qualifier("countryDao2")
     private CountryDao countryDao;
 
     @Autowired
-    private UserCountryDao userCountryDao;
+    private UsercountryDao userCountryDao;
 
     @Autowired
     private DSLContext context;
@@ -49,7 +52,7 @@ public class Jooqtest {
     private void createDao() {
         userDao = new UserDao(context.configuration());
         countryDao = new CountryDao(context.configuration());
-        userCountryDao = new UserCountryDao(context.configuration());
+        userCountryDao = new UsercountryDao(context.configuration());
     }
 
     @Test
@@ -73,10 +76,10 @@ public class Jooqtest {
         countryDao.insert(country, country2);
 
         // 维护关系
-        UserCountry userCountry = new UserCountry();
+        Usercountry userCountry = new Usercountry();
         userCountry.setUserid(1);
         userCountry.setCountryid(1);
-        UserCountry userCountry2 = new UserCountry();
+        Usercountry userCountry2 = new Usercountry();
         userCountry2.setUserid(1);
         userCountry2.setCountryid(2);
         userCountryDao.insert(userCountry, userCountry2);
@@ -99,7 +102,7 @@ public class Jooqtest {
     // =====S 使用dslContext操作
     private USER TABLE_USER = USER.USER;
     private COUNTRY TABLE_COUNTRY = COUNTRY.COUNTRY;
-    private USER_COUNTRY TABLE_USER_COUNTRY = USER_COUNTRY.USER_COUNTRY;
+    private USERCOUNTRY TABLE_USER_COUNTRY = USERCOUNTRY.USERCOUNTRY;
 
     /**
      * DSL 查询单个
@@ -148,7 +151,7 @@ public class Jooqtest {
         // 查询直接映射到VO中
         List<UserCountryVO> userCountryVOS = context.select(TABLE_USER.ID, TABLE_USER.USERNAME, TABLE_USER.USERFULLNAME, TABLE_COUNTRY.COUNTRYNAME)
                 .from(TABLE_USER, TABLE_USER_COUNTRY, TABLE_COUNTRY)
-                .where(TABLE_USER.ID.equal(TABLE_USER_COUNTRY.USERID)).and(TABLE_USER_COUNTRY.USERID.equal(TABLE_COUNTRY.ID)).fetchInto(UserCountryVO.class);
+                .where(TABLE_USER.ID.equal(TABLE_USER_COUNTRY.USERID)).and(TABLE_USER_COUNTRY.COUNTRYID.equal(TABLE_COUNTRY.ID)).fetchInto(UserCountryVO.class);
         System.out.println(userCountryVOS);
     }
 }

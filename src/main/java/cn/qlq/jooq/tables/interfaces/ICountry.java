@@ -4,9 +4,8 @@
 package cn.qlq.jooq.tables.interfaces;
 
 
-import java.io.Serializable;
-
 import javax.annotation.Generated;
+import java.io.Serializable;
 
 
 /**

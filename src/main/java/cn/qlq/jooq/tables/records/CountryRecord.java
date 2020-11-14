@@ -6,14 +6,13 @@ package cn.qlq.jooq.tables.records;
 
 import cn.qlq.jooq.tables.COUNTRY;
 import cn.qlq.jooq.tables.interfaces.ICountry;
-
-import javax.annotation.Generated;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record2;
 import org.jooq.Row2;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
 
 
 /**

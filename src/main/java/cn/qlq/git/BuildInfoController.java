@@ -1,7 +1,7 @@
 package cn.qlq.git;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,11 +16,19 @@ public class BuildInfoController {
     @Autowired
     private BuildInfoProperties.BuildInfo buildInfo;
 
-    @Value("${spring.application.name}")
-    String applicationName;
+    @Autowired
+    private Environment env;
 
     @GetMapping(value = "/buildinfo", produces = {"application/json;charset=UTF-8"})
     public String getBuildInfo() {
-        return "当前应用:" + applicationName + ",\n" + buildInfo.toString();
+        return buildInfo.toString();
+    }
+
+    @GetMapping(value = "/testEnv")
+    public String testEnv() {
+        String serverPort = env.getProperty("server.port");
+        String commitId = env.getProperty("git.commit.id");
+
+        return serverPort + "\t" + commitId;
     }
 }

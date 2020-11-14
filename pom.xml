@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
 
         <!--springboot单元测试 -->
@@ -233,11 +233,6 @@
             <artifactId>jooq-meta</artifactId>
             <version>3.12.4</version>
         </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-codegen</artifactId>
-            <version>3.12.4</version>
-        </dependency>
     </dependencies>
 
     <distributionManagement>
@@ -254,31 +249,6 @@
     <build>
         <!-- 配置了很多插件 -->
         <plugins>
-            <plugin>
-                <!-- Use org.jooq for the Open Source Edition
-                org.jooq.pro-java-8 for commercial editions with Java 8 support,
-                org.jooq.trial for the free trial edition
-                Note: Only the Open Source Edition is hosted on Maven Central.
-                Import the others manually from your distribution -->
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.12.4</version>
-                <!-- The jOOQ code generation plugin is also executed in the generate-sources phase, prior to compilation -->
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <!-- This is a minimal working configuration. See the manual's section about the code generator for more details -->
-                <configuration>
-                    <!-- 这里使用配置文件 -->
-                    <configurationFile>src/main/resources/jooqConfig.xml</configurationFile>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -309,7 +279,7 @@
                 </dependencies>
             </plugin>
 
-            <!-- add git.properties file when package -->
+            <!-- git-commit-id-plugin -->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
@@ -321,9 +291,13 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!--构建过程中,是否打印详细信息-->
                     <verbose>true</verbose>
+                    <!--日期格式-->
                     <dateFormat>yyyyMMddHHmmss</dateFormat>
+                    <!--是否生成"git.properties"文件;默认值:false;-->
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!--指定"git.properties"文件的存放路径-->
                     <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
                     </generateGitPropertiesFilename>
                 </configuration>

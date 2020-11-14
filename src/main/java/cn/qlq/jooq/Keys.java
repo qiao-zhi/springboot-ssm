@@ -5,32 +5,16 @@ package cn.qlq.jooq;
 
 
 import cn.qlq.jooq.tables.COUNTRY;
-import cn.qlq.jooq.tables.FLYWAY_SCHEMA_HISTORY;
-import cn.qlq.jooq.tables.MP_USER;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_PERMISSION;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_ROLE_PERMISSIONS;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_USER;
-import cn.qlq.jooq.tables.SYSTEM_SHIRO_USER_ROLES;
 import cn.qlq.jooq.tables.USER;
-import cn.qlq.jooq.tables.USER2;
-import cn.qlq.jooq.tables.USER_COUNTRY;
+import cn.qlq.jooq.tables.USERCOUNTRY;
 import cn.qlq.jooq.tables.records.CountryRecord;
-import cn.qlq.jooq.tables.records.FlywaySchemaHistoryRecord;
-import cn.qlq.jooq.tables.records.MpUserRecord;
-import cn.qlq.jooq.tables.records.SystemShiroPermissionRecord;
-import cn.qlq.jooq.tables.records.SystemShiroRolePermissionsRecord;
-import cn.qlq.jooq.tables.records.SystemShiroRoleRecord;
-import cn.qlq.jooq.tables.records.SystemShiroUserRecord;
-import cn.qlq.jooq.tables.records.SystemShiroUserRolesRecord;
-import cn.qlq.jooq.tables.records.User2Record;
-import cn.qlq.jooq.tables.records.UserCountryRecord;
 import cn.qlq.jooq.tables.records.UserRecord;
-
-import javax.annotation.Generated;
-
+import cn.qlq.jooq.tables.records.UsercountryRecord;
+import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
+
+import javax.annotation.Generated;
 
 
 /**
@@ -51,22 +35,16 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<CountryRecord, Integer> IDENTITY_COUNTRY = Identities0.IDENTITY_COUNTRY;
+    public static final Identity<UserRecord, Integer> IDENTITY_USER = Identities0.IDENTITY_USER;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<CountryRecord> KEY_COUNTRY_PRIMARY = UniqueKeys0.KEY_COUNTRY_PRIMARY;
-    public static final UniqueKey<FlywaySchemaHistoryRecord> KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY = UniqueKeys0.KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY;
-    public static final UniqueKey<MpUserRecord> KEY_MP_USER_PRIMARY = UniqueKeys0.KEY_MP_USER_PRIMARY;
-    public static final UniqueKey<SystemShiroPermissionRecord> KEY_SYSTEM_SHIRO_PERMISSION_PRIMARY = UniqueKeys0.KEY_SYSTEM_SHIRO_PERMISSION_PRIMARY;
-    public static final UniqueKey<SystemShiroRoleRecord> KEY_SYSTEM_SHIRO_ROLE_PRIMARY = UniqueKeys0.KEY_SYSTEM_SHIRO_ROLE_PRIMARY;
-    public static final UniqueKey<SystemShiroRolePermissionsRecord> KEY_SYSTEM_SHIRO_ROLE_PERMISSIONS_UK_9BGRR9Y35K9DEH6OS7FQ2HXJC = UniqueKeys0.KEY_SYSTEM_SHIRO_ROLE_PERMISSIONS_UK_9BGRR9Y35K9DEH6OS7FQ2HXJC;
-    public static final UniqueKey<SystemShiroUserRecord> KEY_SYSTEM_SHIRO_USER_PRIMARY = UniqueKeys0.KEY_SYSTEM_SHIRO_USER_PRIMARY;
-    public static final UniqueKey<SystemShiroUserRolesRecord> KEY_SYSTEM_SHIRO_USER_ROLES_UK_I8LLCNOHDPE9U5XFNBA0G4JQY = UniqueKeys0.KEY_SYSTEM_SHIRO_USER_ROLES_UK_I8LLCNOHDPE9U5XFNBA0G4JQY;
     public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = UniqueKeys0.KEY_USER_PRIMARY;
-    public static final UniqueKey<User2Record> KEY_USER2_PRIMARY = UniqueKeys0.KEY_USER2_PRIMARY;
-    public static final UniqueKey<UserCountryRecord> KEY_USER_COUNTRY_PRIMARY = UniqueKeys0.KEY_USER_COUNTRY_PRIMARY;
+    public static final UniqueKey<UsercountryRecord> KEY_USERCOUNTRY_PRIMARY = UniqueKeys0.KEY_USERCOUNTRY_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -77,17 +55,14 @@ public class Keys {
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
+    private static class Identities0 {
+        public static Identity<CountryRecord, Integer> IDENTITY_COUNTRY = Internal.createIdentity(COUNTRY.COUNTRY, COUNTRY.COUNTRY.ID);
+        public static Identity<UserRecord, Integer> IDENTITY_USER = Internal.createIdentity(USER.USER, USER.USER.ID);
+    }
+
     private static class UniqueKeys0 {
         public static final UniqueKey<CountryRecord> KEY_COUNTRY_PRIMARY = Internal.createUniqueKey(COUNTRY.COUNTRY, "KEY_country_PRIMARY", COUNTRY.COUNTRY.ID);
-        public static final UniqueKey<FlywaySchemaHistoryRecord> KEY_FLYWAY_SCHEMA_HISTORY_PRIMARY = Internal.createUniqueKey(FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY, "KEY_flyway_schema_history_PRIMARY", FLYWAY_SCHEMA_HISTORY.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK);
-        public static final UniqueKey<MpUserRecord> KEY_MP_USER_PRIMARY = Internal.createUniqueKey(MP_USER.MP_USER, "KEY_mp_user_PRIMARY", MP_USER.MP_USER.ID);
-        public static final UniqueKey<SystemShiroPermissionRecord> KEY_SYSTEM_SHIRO_PERMISSION_PRIMARY = Internal.createUniqueKey(SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION, "KEY_system_shiro_permission_PRIMARY", SYSTEM_SHIRO_PERMISSION.SYSTEM_SHIRO_PERMISSION.ID);
-        public static final UniqueKey<SystemShiroRoleRecord> KEY_SYSTEM_SHIRO_ROLE_PRIMARY = Internal.createUniqueKey(SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE, "KEY_system_shiro_role_PRIMARY", SYSTEM_SHIRO_ROLE.SYSTEM_SHIRO_ROLE.ID);
-        public static final UniqueKey<SystemShiroRolePermissionsRecord> KEY_SYSTEM_SHIRO_ROLE_PERMISSIONS_UK_9BGRR9Y35K9DEH6OS7FQ2HXJC = Internal.createUniqueKey(SYSTEM_SHIRO_ROLE_PERMISSIONS.SYSTEM_SHIRO_ROLE_PERMISSIONS, "KEY_system_shiro_role_permissions_UK_9bgrr9y35k9deh6os7fq2hxjc", SYSTEM_SHIRO_ROLE_PERMISSIONS.SYSTEM_SHIRO_ROLE_PERMISSIONS.PERMISSIONS_ID);
-        public static final UniqueKey<SystemShiroUserRecord> KEY_SYSTEM_SHIRO_USER_PRIMARY = Internal.createUniqueKey(SYSTEM_SHIRO_USER.SYSTEM_SHIRO_USER, "KEY_system_shiro_user_PRIMARY", SYSTEM_SHIRO_USER.SYSTEM_SHIRO_USER.ID);
-        public static final UniqueKey<SystemShiroUserRolesRecord> KEY_SYSTEM_SHIRO_USER_ROLES_UK_I8LLCNOHDPE9U5XFNBA0G4JQY = Internal.createUniqueKey(SYSTEM_SHIRO_USER_ROLES.SYSTEM_SHIRO_USER_ROLES, "KEY_system_shiro_user_roles_UK_i8llcnohdpe9u5xfnba0g4jqy", SYSTEM_SHIRO_USER_ROLES.SYSTEM_SHIRO_USER_ROLES.ROLES_ID);
         public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = Internal.createUniqueKey(USER.USER, "KEY_user_PRIMARY", USER.USER.ID);
-        public static final UniqueKey<User2Record> KEY_USER2_PRIMARY = Internal.createUniqueKey(USER2.USER2, "KEY_user2_PRIMARY", USER2.USER2.ID);
-        public static final UniqueKey<UserCountryRecord> KEY_USER_COUNTRY_PRIMARY = Internal.createUniqueKey(USER_COUNTRY.USER_COUNTRY, "KEY_user_country_PRIMARY", USER_COUNTRY.USER_COUNTRY.USERID, USER_COUNTRY.USER_COUNTRY.COUNTRYID);
+        public static final UniqueKey<UsercountryRecord> KEY_USERCOUNTRY_PRIMARY = Internal.createUniqueKey(USERCOUNTRY.USERCOUNTRY, "KEY_usercountry_PRIMARY", USERCOUNTRY.USERCOUNTRY.USERID, USERCOUNTRY.USERCOUNTRY.COUNTRYID);
     }
 }

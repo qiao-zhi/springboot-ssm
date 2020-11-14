@@ -8,25 +8,14 @@ import cn.qlq.jooq.Indexes;
 import cn.qlq.jooq.Keys;
 import cn.qlq.jooq.Test1;
 import cn.qlq.jooq.tables.records.UserRecord;
-
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Row10;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+
+import javax.annotation.Generated;
+import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -42,12 +31,12 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class USER extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = 119397323;
+    private static final long serialVersionUID = -1543756583;
 
     /**
      * The reference instance of <code>test1.user</code>
      */
-    public static final USER USER = new USER();
+    public static final cn.qlq.jooq.tables.USER USER = new USER();
 
     /**
      * The class holding records for this type
@@ -60,27 +49,42 @@ public class USER extends TableImpl<UserRecord> {
     /**
      * The column <code>test1.user.id</code>.
      */
-    public final TableField<UserRecord, Integer> ID = createField(DSL.name("id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<UserRecord, Integer> ID = createField(DSL.name("id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>test1.user.address</code>.
+     * The column <code>test1.user.username</code>.
      */
-    public final TableField<UserRecord, String> ADDRESS = createField(DSL.name("address"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>test1.user.createtime</code>.
-     */
-    public final TableField<UserRecord, Timestamp> CREATETIME = createField(DSL.name("createtime"), org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
-
-    /**
-     * The column <code>test1.user.isdeleted</code>.
-     */
-    public final TableField<UserRecord, String> ISDELETED = createField(DSL.name("isdeleted"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<UserRecord, String> USERNAME = createField(DSL.name("username"), org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
 
     /**
      * The column <code>test1.user.password</code>.
      */
-    public final TableField<UserRecord, String> PASSWORD = createField(DSL.name("password"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<UserRecord, String> PASSWORD = createField(DSL.name("password"), org.jooq.impl.SQLDataType.VARCHAR(40), this, "");
+
+    /**
+     * The column <code>test1.user.userfullname</code>.
+     */
+    public final TableField<UserRecord, String> USERFULLNAME = createField(DSL.name("userfullname"), org.jooq.impl.SQLDataType.VARCHAR(10), this, "");
+
+    /**
+     * The column <code>test1.user.createtime</code>.
+     */
+    public final TableField<UserRecord, Date> CREATETIME = createField(DSL.name("createtime"), org.jooq.impl.SQLDataType.DATE, this, "");
+
+    /**
+     * The column <code>test1.user.isdeleted</code>.
+     */
+    public final TableField<UserRecord, String> ISDELETED = createField(DSL.name("isdeleted"), org.jooq.impl.SQLDataType.VARCHAR(2), this, "");
+
+    /**
+     * The column <code>test1.user.sex</code>.
+     */
+    public final TableField<UserRecord, String> SEX = createField(DSL.name("sex"), org.jooq.impl.SQLDataType.VARCHAR(2), this, "");
+
+    /**
+     * The column <code>test1.user.address</code>.
+     */
+    public final TableField<UserRecord, String> ADDRESS = createField(DSL.name("address"), org.jooq.impl.SQLDataType.VARCHAR(40), this, "");
 
     /**
      * The column <code>test1.user.roles</code>.
@@ -88,24 +92,9 @@ public class USER extends TableImpl<UserRecord> {
     public final TableField<UserRecord, String> ROLES = createField(DSL.name("roles"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>test1.user.sex</code>.
-     */
-    public final TableField<UserRecord, String> SEX = createField(DSL.name("sex"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
-
-    /**
      * The column <code>test1.user.userblank</code>.
      */
     public final TableField<UserRecord, String> USERBLANK = createField(DSL.name("userblank"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>test1.user.userfullname</code>.
-     */
-    public final TableField<UserRecord, String> USERFULLNAME = createField(DSL.name("userfullname"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>test1.user.username</code>.
-     */
-    public final TableField<UserRecord, String> USERNAME = createField(DSL.name("username"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>test1.user</code> table reference
@@ -151,6 +140,11 @@ public class USER extends TableImpl<UserRecord> {
     }
 
     @Override
+    public Identity<UserRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_USER;
+    }
+
+    @Override
     public UniqueKey<UserRecord> getPrimaryKey() {
         return Keys.KEY_USER_PRIMARY;
     }
@@ -161,12 +155,12 @@ public class USER extends TableImpl<UserRecord> {
     }
 
     @Override
-    public USER as(String alias) {
+    public cn.qlq.jooq.tables.USER as(String alias) {
         return new USER(DSL.name(alias), this);
     }
 
     @Override
-    public USER as(Name alias) {
+    public cn.qlq.jooq.tables.USER as(Name alias) {
         return new USER(alias, this);
     }
 
@@ -174,7 +168,7 @@ public class USER extends TableImpl<UserRecord> {
      * Rename this table
      */
     @Override
-    public USER rename(String name) {
+    public cn.qlq.jooq.tables.USER rename(String name) {
         return new USER(DSL.name(name), null);
     }
 
@@ -182,7 +176,7 @@ public class USER extends TableImpl<UserRecord> {
      * Rename this table
      */
     @Override
-    public USER rename(Name name) {
+    public cn.qlq.jooq.tables.USER rename(Name name) {
         return new USER(name, null);
     }
 
@@ -191,7 +185,7 @@ public class USER extends TableImpl<UserRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row10<Integer, String, Timestamp, String, String, String, String, String, String, String> fieldsRow() {
+    public Row10<Integer, String, String, String, Date, String, String, String, String, String> fieldsRow() {
         return (Row10) super.fieldsRow();
     }
 }
